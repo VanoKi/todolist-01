@@ -1,8 +1,19 @@
+import {Task} from "../App.tsx";
+
 type Props = {
   title: string
+  tasks: Task[]
 };
 export const TodolistItem = (props: Props) => {
-  const {title} = props
+  const {title, tasks} = props
+  const mappedLlist = (tasks:Task[]) => {
+    return tasks.map( task => (
+      <li key={task.id}>
+        <input type={'checkbox'} checked={task.isDone}/>
+        <span>{task.title}</span>
+      </li>
+    ))
+  }
   return (
     <div>
       <h3>{title}</h3>
@@ -11,15 +22,7 @@ export const TodolistItem = (props: Props) => {
         <button>+</button>
       </div>
       <ul>
-        <li>
-          <input type="checkbox" checked={true}/> <span>HTML&CSS</span>
-        </li>
-        <li>
-          <input type="checkbox" checked={true}/> <span>JS</span>
-        </li>
-        <li>
-          <input type="checkbox" checked={false}/> <span>React</span>
-        </li>
+        {tasks.length > 0 ? mappedLlist(tasks) : "There are no tasks"}
       </ul>
       <div>
         <button>All</button>
