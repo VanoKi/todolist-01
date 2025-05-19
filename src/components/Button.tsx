@@ -3,10 +3,10 @@ type Props = {
   onClick?: () => void
 };
 export const Button = (props: Props) => {
-  const {title} = props
+  const {title, onClick} = props
   return (
     <button
-      onClick={() => alert(task.id)}
+      onClick={onClick}
     >
       {title}
     </button>
