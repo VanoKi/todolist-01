@@ -1,8 +1,14 @@
 .app {
   padding: 30px;
-  display: flex;
 }
 
 .app > div {
-  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  margin: auto 10px;
 }
