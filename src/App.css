@@ -10,5 +10,10 @@
 }
 
 button {
-  margin: auto 10px;
+  margin: auto 5px;
+  cursor: pointer;
+}
+
+ul > li> input {
+  cursor: pointer;
 }

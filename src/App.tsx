@@ -4,7 +4,9 @@ import {TodolistItem} from "./components/TodolistItem.tsx";
 function App() {
   return (
       <div className="app">
-        <TodolistItem/>
+        <TodolistItem
+          title={'What to learn'}
+        />
       </div>
   )
 }
