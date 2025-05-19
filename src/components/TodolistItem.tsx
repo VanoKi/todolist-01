@@ -5,9 +5,10 @@ type Props = {
   title: string
   tasks: Task[]
   deleteTask: (taskId:number) => void
+  changeFilter: (filter: string) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask} = props
+  const {title, tasks, deleteTask, changeFilter} = props
 
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => (
@@ -30,9 +31,9 @@ export const TodolistItem = (props: Props) => {
         {!!tasks.length ? mappedLlist(tasks) : "There are no tasks"}
       </ul>
       <div>
-        <Button title={'All'}/>
-        <Button title={'Active'}/>
-        <Button title={'Completed'}/>
+        <Button title={'All'} onClick={() => changeFilter('all')}/>
+        <Button title={'Active'} onClick={() => changeFilter('active')}/>
+        <Button title={'Completed'} onClick={() => changeFilter('completed')}/>
       </div>
     </div>
   );
