@@ -17,3 +17,11 @@ button {
 ul > li> input {
   cursor: pointer;
 }
+
+li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 5px;
+}
