@@ -23,6 +23,11 @@ export const TodolistItem = (props: Props) => {
       </li>
     ))
   }
+  const keyDown =(event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      addTask()
+    }
+  }
 
   return (
     <div>
@@ -30,7 +35,9 @@ export const TodolistItem = (props: Props) => {
       <div>
         <input
           value={inputValue}
-          onChange={onInputChange}/>
+          onChange={onInputChange}
+          onKeyDown={(e) => keyDown(e)}
+        />
         <Button title={'+'} onClick={addTask}/>
       </div>
       <ul>
