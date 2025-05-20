@@ -41,7 +41,9 @@ function App() {
       setTasks([newTask, ...tasks])
     }
     setInputValue('')
-
+  }
+  const changeTask = (taskId:string) => {
+    setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: !task.isDone} : task))
   }
 
 
@@ -55,6 +57,7 @@ function App() {
           inputValue={inputValue}
           onInputChange={onInputChange}
           addTask={addTask}
+          changeTask={changeTask}
         />
       </div>
   )

@@ -11,14 +11,19 @@ type Props = {
   inputValue: string
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   addTask: () => void
+  changeTask: (taskId:string) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask} = props
+  const {title, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask} = props
 
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => (
       <li key={task.id}>
-        <input type={'checkbox'} checked={task.isDone}/>
+        <input
+          type={'checkbox'}
+          checked={task.isDone}
+          onChange={() => changeTask(task.id)}
+        />
         <span>{task.title}</span>
         <Button title={'x'} onClick={() => deleteTask(task.id)}/>
       </li>
