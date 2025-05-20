@@ -1,9 +1,10 @@
 import './App.css'
 import {TodolistItem} from "./components/TodolistItem.tsx";
 import {useState} from "react";
+import {v1} from 'uuid'
 
 export type Task = {
-  id: number
+  id: string
   title: string
   isDone: boolean
 }
@@ -11,13 +12,13 @@ export type Task = {
 function App() {
   const [filter, setFilter] = useState('all')
   const [tasks, setTasks] = useState([
-    { id: 1, title: 'HTML&CSS', isDone: true },
-    { id: 2, title: 'JS', isDone: true },
-    { id: 3, title: 'ReactJS', isDone: false },
+    { id: v1(), title: 'HTML&CSS', isDone: true },
+    { id: v1(), title: 'JS', isDone: true },
+    { id: v1(), title: 'ReactJS', isDone: false },
   ])
 
   const changeFilter = (filter:string) => setFilter(filter)
-  const deleteTask = (taskID: number) => {
+  const deleteTask = (taskID: string) => {
     setTasks(tasks.filter(task => task.id !== taskID))
   }
   let filterdTasks = tasks

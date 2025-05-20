@@ -4,7 +4,7 @@ import {Button} from "./Button.tsx";
 type Props = {
   title: string
   tasks: Task[]
-  deleteTask: (taskId:number) => void
+  deleteTask: (taskId:string) => void
   changeFilter: (filter: string) => void
 };
 export const TodolistItem = (props: Props) => {
@@ -25,7 +25,7 @@ export const TodolistItem = (props: Props) => {
       <h2>{title}</h2>
       <div>
         <input/>
-        <Button title={'x'}/>
+        <Button title={'+'}/>
       </div>
       <ul>
         {!!tasks.length ? mappedLlist(tasks) : "There are no tasks"}
