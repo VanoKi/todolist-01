@@ -1,14 +1,18 @@
 import {Task} from "../App.tsx";
 import {Button} from "./Button.tsx";
+import {ChangeEvent} from "react";
 
 type Props = {
   title: string
   tasks: Task[]
   deleteTask: (taskId:string) => void
   changeFilter: (filter: string) => void
+  inputValue: string
+  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
+  addTask: () => void
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, changeFilter} = props
+  const {title, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask} = props
 
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => (
@@ -24,8 +28,10 @@ export const TodolistItem = (props: Props) => {
     <div>
       <h2>{title}</h2>
       <div>
-        <input/>
-        <Button title={'+'}/>
+        <input
+          value={inputValue}
+          onChange={onInputChange}/>
+        <Button title={'+'} onClick={addTask}/>
       </div>
       <ul>
         {!!tasks.length ? mappedLlist(tasks) : "There are no tasks"}

@@ -1,6 +1,6 @@
 import './App.css'
 import {TodolistItem} from "./components/TodolistItem.tsx";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 import {v1} from 'uuid'
 
 export type Task = {
@@ -11,6 +11,7 @@ export type Task = {
 
 function App() {
   const [filter, setFilter] = useState('all')
+  const [inputValue, setInputValue] = useState('')
   const [tasks, setTasks] = useState([
     { id: v1(), title: 'HTML&CSS', isDone: true },
     { id: v1(), title: 'JS', isDone: true },
@@ -27,6 +28,21 @@ function App() {
   } else if (filter === 'completed') {
     filteredTasks = tasks.filter(task => task.isDone)
   }
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.currentTarget.value)
+  }
+  const addTask = () => {
+    if (inputValue.trim()) {
+      const newTask: Task = {
+        id: v1(),
+        title: inputValue,
+        isDone: false
+      }
+      setTasks([newTask, ...tasks])
+    }
+    setInputValue('')
+
+  }
 
 
   return (
@@ -36,6 +52,9 @@ function App() {
           tasks={filteredTasks}
           deleteTask={deleteTask}
           changeFilter={changeFilter}
+          inputValue={inputValue}
+          onInputChange={onInputChange}
+          addTask={addTask}
         />
       </div>
   )
