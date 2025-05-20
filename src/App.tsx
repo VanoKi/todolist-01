@@ -21,11 +21,11 @@ function App() {
   const deleteTask = (taskID: string) => {
     setTasks(tasks.filter(task => task.id !== taskID))
   }
-  let filterdTasks = tasks
+  let filteredTasks = tasks
   if (filter === 'active') {
-    filterdTasks = tasks.filter(task => !task.isDone)
+    filteredTasks = tasks.filter(task => !task.isDone)
   } else if (filter === 'completed') {
-    filterdTasks = tasks.filter(task => task.isDone)
+    filteredTasks = tasks.filter(task => task.isDone)
   }
 
 
@@ -33,7 +33,7 @@ function App() {
       <div className="app">
         <TodolistItem
           title={'What to learn'}
-          tasks={filterdTasks}
+          tasks={filteredTasks}
           deleteTask={deleteTask}
           changeFilter={changeFilter}
         />
