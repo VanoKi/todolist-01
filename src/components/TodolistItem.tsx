@@ -1,6 +1,7 @@
 import {Task} from "../App.tsx";
 import {Button} from "./Button.tsx";
 import {ChangeEvent} from "react";
+import {KeyboardEvent} from "react";
 
 type Props = {
   title: string
@@ -36,7 +37,7 @@ export const TodolistItem = (props: Props) => {
         <input
           value={inputValue}
           onChange={onInputChange}
-          onKeyDown={(e) => keyDown(e)}
+          onKeyDown={keyDown}
         />
         <Button title={'+'} onClick={addTask}/>
       </div>
