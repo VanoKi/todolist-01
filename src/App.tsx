@@ -31,6 +31,7 @@ function App() {
   }
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.currentTarget.value)
+    setError('')
   }
   const addTask = () => {
     if (inputValue.trim()) {
