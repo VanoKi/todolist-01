@@ -51,7 +51,6 @@ function App() {
     setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: !task.isDone} : task))
   }
 
-
   return (
       <div className="app">
         <TodolistItem
@@ -64,6 +63,7 @@ function App() {
           addTask={addTask}
           changeTask={changeTask}
           error={error}
+          filter={filter}
         />
       </div>
   )

@@ -13,9 +13,10 @@ type Props = {
   addTask: () => void
   changeTask: (taskId:string) => void
   error: string
+  filter: string
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask, error} = props
+  const {title, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask, error, filter} = props
 
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => (
@@ -35,6 +36,9 @@ export const TodolistItem = (props: Props) => {
       addTask()
     }
   }
+  const getFilterClass = (btnFilter: string) => {
+    return filter === btnFilter ? 'active-filter' : ''
+  }
 
   return (
     <div>
@@ -53,9 +57,17 @@ export const TodolistItem = (props: Props) => {
         {!!tasks.length ? mappedLlist(tasks) : "There are no tasks"}
       </ul>
       <div>
-        <Button title={'All'} onClick={() => changeFilter('all')}/>
-        <Button title={'Active'} onClick={() => changeFilter('active')}/>
-        <Button title={'Completed'} onClick={() => changeFilter('completed')}/>
+        <Button
+          title={'All'} onClick={() => changeFilter('all')}
+          className={getFilterClass('all')}/>
+        <Button
+          title={'Active'}
+          onClick={() => changeFilter('active')}
+          className={getFilterClass('active')}/>
+        <Button
+          title={'Completed'}
+          onClick={() => changeFilter('completed')}
+          className={getFilterClass('completed')}/>
       </div>
     </div>
   );

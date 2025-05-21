@@ -34,3 +34,7 @@ li {
   color: crimson;
   text-align: center;
 }
+
+.active-filter {
+  background-color: #dfb1bb;
+}
