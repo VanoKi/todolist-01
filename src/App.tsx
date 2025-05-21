@@ -12,6 +12,7 @@ export type Task = {
 function App() {
   const [filter, setFilter] = useState('all')
   const [inputValue, setInputValue] = useState('')
+  const [error, setError] = useState('')
   const [tasks, setTasks] = useState([
     { id: v1(), title: 'HTML&CSS', isDone: true },
     { id: v1(), title: 'JS', isDone: true },
@@ -39,6 +40,8 @@ function App() {
         isDone: false
       }
       setTasks([newTask, ...tasks])
+    } else {
+      setError('Title is required')
     }
     setInputValue('')
   }
@@ -58,6 +61,7 @@ function App() {
           onInputChange={onInputChange}
           addTask={addTask}
           changeTask={changeTask}
+          error={error}
         />
       </div>
   )

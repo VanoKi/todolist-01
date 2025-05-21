@@ -12,9 +12,10 @@ type Props = {
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   addTask: () => void
   changeTask: (taskId:string) => void
+  error: string
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask} = props
+  const {title, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask, error} = props
 
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => (
@@ -40,11 +41,13 @@ export const TodolistItem = (props: Props) => {
       <h2>{title}</h2>
       <div>
         <input
+          className={error ? 'error' : ''}
           value={inputValue}
           onChange={onInputChange}
           onKeyDown={keyDown}
         />
         <Button title={'+'} onClick={addTask}/>
+        {error && <span className={'error-message'}>{error}</span>}
       </div>
       <ul>
         {!!tasks.length ? mappedLlist(tasks) : "There are no tasks"}

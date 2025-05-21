@@ -25,3 +25,11 @@ li {
   gap: 10px;
   margin-bottom: 5px;
 }
+
+.error {
+  border: 2px solid crimson;
+}
+
+.error-message {
+  color: crimson;
+}
