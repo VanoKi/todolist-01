@@ -47,7 +47,7 @@ export const TodolistItem = (props: Props) => {
           onKeyDown={keyDown}
         />
         <Button title={'+'} onClick={addTask}/>
-        {error && <span className={'error-message'}>{error}</span>}
+        {error && <div className={'error-message'}>{error}</div>}
       </div>
       <ul>
         {!!tasks.length ? mappedLlist(tasks) : "There are no tasks"}
