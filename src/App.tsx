@@ -40,6 +40,7 @@ function App() {
         isDone: false
       }
       setTasks([newTask, ...tasks])
+      setError('')
     } else {
       setError('Title is required')
     }
