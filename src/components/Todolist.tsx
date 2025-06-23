@@ -8,7 +8,7 @@ type Props = {
   tasks: TaskType[]
   todolistId: string
   removeTodolist: (todolistId:string) => void
-  removeTask: (todolistId: string, taskId: string) => void
+  removeTask: ({todolistId: string, taskId: string}) => void
 };
 
 export const Todolist = (props: Props) => {
@@ -31,7 +31,7 @@ export const Todolist = (props: Props) => {
             <li key={task.id}>
               <input type='checkbox' checked={task.isDone}/>
               <span>{task.title}</span>
-              <Button title={'x'} onClick={() => removeTask(todolistId, task.id)}/>
+              <Button title={'x'} onClick={() => removeTask({todolistId, taskId: task.id})}/>
             </li>
           )
         })}

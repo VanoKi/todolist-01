@@ -47,12 +47,12 @@ function App() {
 
   // console.log(todolists)
 
-  const removeTask = (todolistId: string, taskId:string) => {
+  const removeTask = ({todolistId, taskId}:{todolistId: string, taskId: string}) => {
     setTodolists(todolists.map(tl => tl.id === todolistId ?
       {...tl, tasks: tl.tasks.filter(task => task.id !== taskId)}
       :tl))
   }
-  const changeTaskStatus = (taskId:string) => {}
+  const changeTaskStatus = (todolistId: string, taskId:string) => {}
 
   return (
     <div className="app">
