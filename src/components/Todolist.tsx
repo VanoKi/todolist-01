@@ -1,5 +1,4 @@
 // @flow 
-import * as React from 'react';
 import {TaskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
 
@@ -15,7 +14,7 @@ export const Todolist = (props: Props) => {
       <h3>{title}</h3>
       <div>
         <input/>
-        <button>+</button>
+        <Button title={'+'}/>
       </div>
       <ul>
         {tasks.map( task => {
@@ -29,9 +28,9 @@ export const Todolist = (props: Props) => {
         })}
       </ul>
       <div>
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
+        <Button title={'All'}/>
+        <Button title={'Active'}/>
+        <Button title={'Completed'}/>
       </div>
     </div>
   );
