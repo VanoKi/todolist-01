@@ -60,8 +60,15 @@ function App() {
           : task)}
       : tl))
   }
-  const addTask = () => {
-
+  const addTask = ({todolistId, task}:{todolistId: string, task: string}) => {
+    const newTask = {
+      id: createId(),
+      title: task,
+      isDone: false
+    }
+    setTodolists(todolists.map(tl => tl.id === todolistId
+      ? {...tl, tasks: [newTask, ...tl.tasks]}
+      : tl))
   }
 
   return (
@@ -77,6 +84,7 @@ function App() {
             removeTodolist={() => removeTodolist(tl.id)}
             removeTask={removeTask}
             changeTaskStatus={changeTaskStatus}
+            addTask={addTask}
           />
         )
       })}

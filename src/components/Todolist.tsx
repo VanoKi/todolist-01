@@ -10,10 +10,11 @@ type Props = {
   removeTodolist: (todolistId:string) => void
   removeTask: ({todolistId: string, taskId: string}) => void
   changeTaskStatus: ({todolistId: string, taskId: string}) => void
+  addTask: ({todolistId: string, task: string}) => void
 };
 
 export const Todolist = (props: Props) => {
-  const {title, tasks, todolistId, removeTodolist, removeTask, changeTaskStatus} = props
+  const {title, tasks, todolistId, removeTodolist, removeTask, changeTaskStatus, addTask} = props
   return (
     <div>
       <div className={'headline'}>
@@ -24,7 +25,7 @@ export const Todolist = (props: Props) => {
         />
       </div>
       <div>
-        <Input/>
+        <Input addItem={(taskTitle) => addTask({todolistId, task: taskTitle})}/>
       </div>
       <ul>
         {tasks.map( task => {
