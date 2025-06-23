@@ -8,6 +8,14 @@ type Props = {
 export const Input = (props: Props) => {
   const {addItem} = props
   const [value, setValue] = useState('')
+  const onAddClick = () => {
+    if (value.trim()) {
+      if (addItem) {
+        addItem(value)
+      }
+      setValue('')
+    }
+  }
   return (
     <div>
       <input
@@ -16,7 +24,7 @@ export const Input = (props: Props) => {
       />
       <Button
         title={'+'}
-        onClick={() => addItem(value)}
+        onClick={onAddClick}
       />
     </div>
   );

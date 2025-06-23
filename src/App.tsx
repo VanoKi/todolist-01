@@ -39,12 +39,14 @@ function App() {
   const removeTodolist = (todolistId: string) => {
     setTodolists(todolists.filter( tl => tl.id !== todolistId))
   }
-
-  const addTodolist = (newTodolist:string) => {
-    setTodolists({newTodolist: [], ...todolists})
+  const addTodolist = (title:string) => {
+    const newTodolist = {
+      id: createId(),
+      title,
+      tasks: []
+    }
+    setTodolists([...todolists, newTodolist])
   }
-
-  // console.log(todolists)
 
   const removeTask = ({todolistId, taskId}:{todolistId: string, taskId: string}) => {
     setTodolists(todolists.map(tl => tl.id === todolistId ?
@@ -57,6 +59,9 @@ function App() {
           ? {...task, isDone: !task.isDone}
           : task)}
       : tl))
+  }
+  const addTask = () => {
+
   }
 
   return (
