@@ -1,6 +1,7 @@
 // @flow 
 import * as React from 'react';
 import {TaskType} from "../App.tsx";
+import {Button} from "./Button.tsx";
 
 type Props = {
   title: string
@@ -22,7 +23,7 @@ export const Todolist = (props: Props) => {
             <li>
               <input type='checkbox' checked={task.isDone}/>
               <span>{task.title}</span>
-
+              <Button title={'x'}/>
             </li>
           )
         })}
