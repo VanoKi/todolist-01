@@ -31,10 +31,11 @@ function App() {
 
   return (
     <div className="app">
-      <Todolist
-        title={todolists[1].title}
-        tasks={todolists[1].tasks}
-      />
+      {todolists.map( tl => {
+        return (
+          <Todolist title={tl.title} tasks={tl.tasks}/>
+        )
+      })}
     </div>
   )
 }
