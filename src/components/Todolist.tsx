@@ -11,7 +11,10 @@ export const Todolist = (props: Props) => {
   const {title, tasks} = props
   return (
     <div>
-      <h3>{title}</h3>
+      <div className={'headline'}>
+        <h3>{title}</h3>
+        <Button title={'x'}/>
+      </div>
       <div>
         <input/>
         <Button title={'+'}/>
