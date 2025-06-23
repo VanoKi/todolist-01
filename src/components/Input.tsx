@@ -5,6 +5,7 @@ type Props = {
   onClick?: () => void
 };
 export const Input = (props: Props) => {
+  const {onClick} = props
   return (
     <div>
       <input/>
