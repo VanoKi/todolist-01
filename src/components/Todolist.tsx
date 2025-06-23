@@ -34,7 +34,7 @@ export const Todolist = (props: Props) => {
           )
         })}
       </ul>
-      <div>
+      <div className={'btn-wrapper'}>
         <Button title={'All'}/>
         <Button title={'Active'}/>
         <Button title={'Completed'}/>
