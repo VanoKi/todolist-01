@@ -9,10 +9,11 @@ type Props = {
   todolistId: string
   removeTodolist: (todolistId:string) => void
   removeTask: ({todolistId: string, taskId: string}) => void
+  changeTaskStatus: ({todolistId: string, taskId: string}) => void
 };
 
 export const Todolist = (props: Props) => {
-  const {title, tasks, todolistId, removeTodolist, removeTask} = props
+  const {title, tasks, todolistId, removeTodolist, removeTask, changeTaskStatus} = props
   return (
     <div>
       <div className={'headline'}>
@@ -29,7 +30,7 @@ export const Todolist = (props: Props) => {
         {tasks.map( task => {
           return (
             <li key={task.id}>
-              <input type='checkbox' checked={task.isDone}/>
+              <input type='checkbox' checked={task.isDone} onChange={() => changeTaskStatus({todolistId, taskId: task.id})}/>
               <span>{task.title}</span>
               <Button title={'x'} onClick={() => removeTask({todolistId, taskId: task.id})}/>
             </li>

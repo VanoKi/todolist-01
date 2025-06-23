@@ -8,7 +8,6 @@ export type TaskType = {
   title: string
   isDone: boolean
 }
-
 export type TodolistType = {
   id: string
   title: string
@@ -52,7 +51,13 @@ function App() {
       {...tl, tasks: tl.tasks.filter(task => task.id !== taskId)}
       :tl))
   }
-  const changeTaskStatus = (todolistId: string, taskId:string) => {}
+  const changeTaskStatus = ({todolistId, taskId}:{todolistId: string, taskId: string}) => {
+    setTodolists(todolists.map(tl => tl.id === todolistId
+      ? {...tl, tasks: tl.tasks.map( task => task.id === taskId
+          ? {...task, isDone: !task.isDone}
+          : task)}
+      : tl))
+  }
 
   return (
     <div className="app">
@@ -66,6 +71,7 @@ function App() {
             todolistId={tl.id}
             removeTodolist={() => removeTodolist(tl.id)}
             removeTask={removeTask}
+            changeTaskStatus={changeTaskStatus}
           />
         )
       })}
