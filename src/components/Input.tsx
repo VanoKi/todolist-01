@@ -1,17 +1,22 @@
 // @flow
 import {Button} from "./Button.tsx";
+import {useState} from "react";
 
 type Props = {
-  onClick?: () => void
+  addItem?: (title: string) => void
 };
 export const Input = (props: Props) => {
-  const {onClick} = props
+  const {addItem} = props
+  const [value, setValue] = useState('')
   return (
     <div>
-      <input/>
+      <input
+        value={value}
+        onChange={(e) => setValue(e.currentTarget.value)}
+      />
       <Button
         title={'+'}
-        // onClick={}
+        onClick={() => addItem(value)}
       />
     </div>
   );

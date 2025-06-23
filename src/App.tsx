@@ -35,9 +35,15 @@ function App() {
     setTodolists(todolists.filter( tl => tl.id !== todolistId))
   }
 
+  const addTodolist = (newTodolist:string) => {
+    setTodolists({newTodolist: [], ...todolists})
+  }
+
+  console.log(todolists)
+
   return (
     <div className="app">
-      <Input />
+      <Input addItem={addTodolist}/>
       {todolists.map( tl => {
         return (
           <Todolist
