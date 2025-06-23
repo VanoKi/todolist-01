@@ -3,7 +3,7 @@ import {Button} from "./Button.tsx";
 import {useState} from "react";
 
 type Props = {
-  addItem?: (title: string) => void
+  addItem: (title: string) => void
 };
 export const Input = (props: Props) => {
   const {addItem} = props
