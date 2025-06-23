@@ -1,4 +1,11 @@
 import './App.css'
+import {Todolist} from "./components/Todolist.tsx";
+
+export type TaskType = {
+  id: string
+  title: string
+  isDone: boolean
+}
 
 function App() {
   const createId = () => crypto.randomUUID()
@@ -21,33 +28,13 @@ function App() {
       ]
     }
   ]
-  console.log(`${todolists[0].id}--${todolists[1].id}`)
 
   return (
     <div className="app">
-      <div>
-        <h3>What to learn</h3>
-        <div>
-          <input/>
-          <button>+</button>
-        </div>
-        <ul>
-          <li>
-            <input type="checkbox" checked={true}/> <span>HTML&CSS</span>
-          </li>
-          <li>
-            <input type="checkbox" checked={true}/> <span>JS</span>
-          </li>
-          <li>
-            <input type="checkbox" checked={false}/> <span>React</span>
-          </li>
-        </ul>
-        <div>
-          <button>All</button>
-          <button>Active</button>
-          <button>Completed</button>
-        </div>
-      </div>
+      <Todolist
+        title={todolists[1].title}
+        tasks={todolists[1].tasks}
+      />
     </div>
   )
 }
