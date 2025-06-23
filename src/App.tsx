@@ -9,6 +9,12 @@ export type TaskType = {
   isDone: boolean
 }
 
+export type TodolistType = {
+  id: string
+  title: string
+  tasks: TaskType[]
+}
+
 function App() {
   const createId = () => crypto.randomUUID()
   const [todolists, setTodolists] = useState([
@@ -39,7 +45,13 @@ function App() {
     setTodolists({newTodolist: [], ...todolists})
   }
 
-  console.log(todolists)
+  // console.log(todolists)
+
+  const removeTask = (taskId:string) => {
+    // setTodolists(todolists.filter(tl => tl))
+    console.log()
+  }
+  const changeTaskStatus = (taskId:string) => {}
 
   return (
     <div className="app">
@@ -51,6 +63,7 @@ function App() {
             tasks={tl.tasks}
             key={tl.id}
             removeTodolist={() => removeTodolist(tl.id)}
+            removeTask={removeTask}
           />
         )
       })}

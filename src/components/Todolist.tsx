@@ -7,10 +7,11 @@ type Props = {
   title: string
   tasks: TaskType[]
   removeTodolist: (todolistId:string) => void
+  removeTask: () => void
 };
 
 export const Todolist = (props: Props) => {
-  const {title, tasks, removeTodolist} = props
+  const {title, tasks, removeTodolist, removeTask} = props
   return (
     <div>
       <div className={'headline'}>
@@ -29,7 +30,7 @@ export const Todolist = (props: Props) => {
             <li key={task.id}>
               <input type='checkbox' checked={task.isDone}/>
               <span>{task.title}</span>
-              <Button title={'x'}/>
+              <Button title={'x'} onClick={removeTask}/>
             </li>
           )
         })}
