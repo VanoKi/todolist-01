@@ -31,9 +31,14 @@ function App() {
 
   return (
     <div className="app">
+      <input></input>
       {todolists.map( tl => {
         return (
-          <Todolist title={tl.title} tasks={tl.tasks}/>
+          <Todolist
+            title={tl.title}
+            tasks={tl.tasks}
+            key={tl.id}
+          />
         )
       })}
     </div>
