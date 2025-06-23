@@ -48,8 +48,9 @@ function App() {
   // console.log(todolists)
 
   const removeTask = (todolistId: string, taskId:string) => {
-    // setTodolists(todolists.filter(tl => tl))
-    console.log(todolistId, taskId)
+    setTodolists(todolists.map(tl => tl.id === todolistId ?
+      {...tl, tasks: tl.tasks.filter(task => task.id !== taskId)}
+      :tl))
   }
   const changeTaskStatus = (taskId:string) => {}
 
