@@ -1,5 +1,7 @@
 import './App.css'
 import {Todolist} from "./components/Todolist.tsx";
+import {Input} from "./components/Input.tsx";
+import {useState} from "react";
 
 export type TaskType = {
   id: string
@@ -9,7 +11,7 @@ export type TaskType = {
 
 function App() {
   const createId = () => crypto.randomUUID()
-  const todolists = [
+  const [todolists, setTodolists] = useState([
     {
       id: createId(),
       title: 'What to learn',
@@ -27,17 +29,22 @@ function App() {
         {id: '2', title: 'Bread', isDone: false},
       ]
     }
-  ]
+  ])
+
+  const removeTodolist = (todolistId: string) => {
+    setTodolists(todolists.filter( tl => tl.id !== todolistId))
+  }
 
   return (
     <div className="app">
-      <input></input>
+      <Input />
       {todolists.map( tl => {
         return (
           <Todolist
             title={tl.title}
             tasks={tl.tasks}
             key={tl.id}
+            removeTodolist={() => removeTodolist(tl.id)}
           />
         )
       })}

@@ -1,23 +1,27 @@
 // @flow 
 import {TaskType} from "../App.tsx";
 import {Button} from "./Button.tsx";
+import {Input} from "./Input.tsx";
 
 type Props = {
   title: string
   tasks: TaskType[]
+  removeTodolist: (todolistId:string) => void
 };
 
 export const Todolist = (props: Props) => {
-  const {title, tasks} = props
+  const {title, tasks, removeTodolist} = props
   return (
     <div>
       <div className={'headline'}>
         <h3>{title}</h3>
-        <Button title={'x'}/>
+        <Button
+          title={'x'}
+          onClick={removeTodolist}
+        />
       </div>
       <div>
-        <input/>
-        <Button title={'+'}/>
+        <Input/>
       </div>
       <ul>
         {tasks.map( task => {
