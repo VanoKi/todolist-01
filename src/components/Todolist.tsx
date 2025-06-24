@@ -1,24 +1,27 @@
 // @flow
 import {Task} from "../App.tsx";
 import {Button} from "./Button.tsx";
+import {Input} from "./Input.tsx";
 
 type Props = {
   tasks: Task[]
+  removeTask: (taskId:string) => void
 };
 export const Todolist = (props: Props) => {
-  const {tasks} = props
+  const {tasks, removeTask} = props
   const Bang = () => {console.log('Bang')}
   return (
       <div>
         <h3>What to learn</h3>
         <div>
-          <input/>
-          <Button onClick={Bang} title={'+'}/>
+          <Input />
         </div>
         <ul>
           {tasks.map(task => (
             <li key={task.id}>
-              <input type="checkbox" checked={task.isDone}/> <span>{task.title}</span>
+              <input type="checkbox" checked={task.isDone}/>
+              <span>{task.title}</span>
+              <Button onClick={() => removeTask(task.id)} title={'x'}/>
             </li>
           ))}
         </ul>

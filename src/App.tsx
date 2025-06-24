@@ -11,16 +11,19 @@ export type FilterType = 'all' | 'active' | 'completed'
 
 function App() {
   const v1 = () => crypto.randomUUID()
+  const [filter, setFilter] = useState('all')
   const [tasks, setTasks] = useState<Task[]>([
     { id: v1(), title: 'HTML&CSS', isDone: true },
     { id: v1(), title: 'JS', isDone: true },
     { id: v1(), title: 'ReactJS', isDone: false },
   ])
+  const removeTask = (taskId:string) => console.log(taskId)
 
   return (
       <div className="app">
         <Todolist
           tasks={tasks}
+          removeTask={removeTask}
         />
       </div>
   )
