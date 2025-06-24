@@ -9,17 +9,22 @@ type Props = {
 export const Input = (props: Props) => {
   const {addItem} = props
   const [value, setValue] = useState('')
-  const [error, setError] = useState(true)
+  const [error, setError] = useState(false)
   const onClickHandler = () => {
-    if (value.trim() !== '') {
+    const trimmedValue = value.trim()
+    if (trimmedValue) {
       addItem(value.trim())
       setValue('')
+    } else {
+      setError(true)
     }
   }
 
   return (
     <div>
-      <input onChange={(e) => setValue(e.currentTarget.value)} value={value}/>
+      <input
+        onChange={(e) => setValue(e.currentTarget.value)}
+        value={value}/>
       <Button onClick={onClickHandler} title={'+'}/>
       {error && <div>The input can't be an empty</div>}
     </div>
