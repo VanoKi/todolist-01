@@ -1,5 +1,5 @@
 // @flow
-import {Task} from "../App.tsx";
+import {FilterType, Task} from "../App.tsx";
 import {Button} from "./Button.tsx";
 import {Input} from "./Input.tsx";
 
@@ -7,10 +7,10 @@ type Props = {
   tasks: Task[]
   removeTask: (taskId:string) => void
   changeStatus: (taskId:string) => void
+  setFilter: (filter:FilterType) => void
 };
 export const Todolist = (props: Props) => {
-  const {tasks, removeTask, changeStatus} = props
-  const Bang = () => {console.log('Bang')}
+  const {tasks, removeTask, changeStatus, setFilter} = props
   return (
       <div>
         <h3>What to learn</h3>
@@ -31,9 +31,9 @@ export const Todolist = (props: Props) => {
           ))}
         </ul>
         <div>
-          <Button onClick={Bang} title={'All'}/>
-          <Button onClick={Bang} title={'Active'}/>
-          <Button onClick={Bang} title={'Completed'}/>
+          <Button onClick={()=> setFilter('all')} title={'All'}/>
+          <Button onClick={()=> setFilter('active')} title={'Active'}/>
+          <Button onClick={()=> setFilter('completed')} title={'Completed'}/>
         </div>
       </div>
   );

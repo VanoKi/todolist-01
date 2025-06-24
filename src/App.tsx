@@ -26,13 +26,20 @@ function App() {
       ? {...task, isDone: !task.isDone}
       : task))
   }
-
+  const changeFiler = (filter:FilterType) => {
+    switch (filter) {
+      case "active": return tasks.filter(task => !task.isDone )
+      case "completed": return tasks.filter(task => task.isDone )
+      default: return tasks
+    }
+  }
   return (
       <div className="app">
         <Todolist
-          tasks={tasks}
+          tasks={changeFiler(filter)}
           removeTask={removeTask}
           changeStatus={changeStatus}
+          setFilter={setFilter}
         />
       </div>
   )
