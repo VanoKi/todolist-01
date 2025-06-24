@@ -1,5 +1,4 @@
 // @flow 
-import * as React from 'react';
 import {Button} from "./Button.tsx";
 import {useState} from "react";
 import {KeyboardEvent} from "react";
@@ -7,6 +6,7 @@ import {KeyboardEvent} from "react";
 type Props = {
   addItem: (item:string) => void
 };
+
 export const Input = (props: Props) => {
   const {addItem} = props
   const [value, setValue] = useState('')
@@ -24,6 +24,10 @@ export const Input = (props: Props) => {
     if (e.key === 'Enter') {
       onClickHandler()
     }
+    if (e.key === 'Escape') {
+      setError(false)
+      setValue('')
+    }
   }
 
   return (
@@ -32,6 +36,7 @@ export const Input = (props: Props) => {
         onChange={(e) => setValue(e.currentTarget.value)}
         onKeyDown={onKeyDown}
         value={value}
+        onBlur={() => setError(false)}
       />
       <Button onClick={onClickHandler} title={'+'}/>
       {error && <div>The input can't be an empty</div>}

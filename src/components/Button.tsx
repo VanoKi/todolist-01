@@ -1,6 +1,4 @@
-// @flow 
-import * as React from 'react';
-
+// @flow
 type Props = {
   onClick: () => void
   title: string
