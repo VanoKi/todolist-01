@@ -71,22 +71,6 @@ function App() {
       ? {...tl, tasks: [newTask, ...tl.tasks]}
       : tl))
   }
-  const switchFilter = (filter: FilterType, todolistId:string) => {
-    const tl = todolists.filter(tl => todolistId === tl.id)
-    switch (filter) {
-      case "all": {
-        return tl
-      }
-      case "active": {
-        return tl
-      }
-      case "completed": {
-        return tl
-      }
-    }
-  }
-
-  // console.log(switchFilter('active'))
 
   return (
     <div className="app">
