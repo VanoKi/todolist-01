@@ -1,5 +1,6 @@
 // @flow
 import {Task} from "../App.tsx";
+import {Button} from "./Button.tsx";
 
 type Props = {
   tasks: Task[]
@@ -11,7 +12,7 @@ export const Todolist = (props: Props) => {
         <h3>What to learn</h3>
         <div>
           <input/>
-          <button>+</button>
+          <Button onClick={() => {console.log('Bang')}} title={'+'}/>
         </div>
         <ul>
           {tasks.map(task => (
