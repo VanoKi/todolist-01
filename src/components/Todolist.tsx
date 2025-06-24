@@ -8,14 +8,15 @@ type Props = {
   removeTask: (taskId:string) => void
   changeStatus: (taskId:string) => void
   setFilter: (filter:FilterType) => void
+  addTask: (task:string) => void
 };
 export const Todolist = (props: Props) => {
-  const {tasks, removeTask, changeStatus, setFilter} = props
+  const {tasks, removeTask, changeStatus, setFilter, addTask} = props
   return (
       <div>
         <h3>What to learn</h3>
         <div>
-          <Input />
+          <Input addItem={addTask}/>
         </div>
         <ul>
           {tasks.map(task => (
