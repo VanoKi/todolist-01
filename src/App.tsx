@@ -17,7 +17,9 @@ function App() {
     { id: v1(), title: 'JS', isDone: true },
     { id: v1(), title: 'ReactJS', isDone: false },
   ])
-  const removeTask = (taskId:string) => console.log(taskId)
+  const removeTask = (taskId:string) => {
+    setTasks(tasks.filter( t => t.id !== taskId))
+  }
 
   return (
       <div className="app">
