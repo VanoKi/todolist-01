@@ -1,5 +1,6 @@
 import './App.css'
 import {useState} from "react";
+import {Todolist} from "./components/Todolist.tsx";
 
 export type Task = {
   id: string,
@@ -18,7 +19,9 @@ function App() {
 
   return (
       <div className="app">
-
+        <Todolist
+          tasks={tasks}
+        />
       </div>
   )
 }
