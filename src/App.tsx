@@ -20,12 +20,19 @@ function App() {
   const removeTask = (taskId:string) => {
     setTasks(tasks.filter( t => t.id !== taskId))
   }
+  const addTask = () => {}
+  const changeStatus = (taskId:string) => {
+    setTasks(tasks.map(task => task.id === taskId
+      ? {...task, isDone: !task.isDone}
+      : task))
+  }
 
   return (
       <div className="app">
         <Todolist
           tasks={tasks}
           removeTask={removeTask}
+          changeStatus={changeStatus}
         />
       </div>
   )

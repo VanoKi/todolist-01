@@ -6,9 +6,10 @@ import {Input} from "./Input.tsx";
 type Props = {
   tasks: Task[]
   removeTask: (taskId:string) => void
+  changeStatus: (taskId:string) => void
 };
 export const Todolist = (props: Props) => {
-  const {tasks, removeTask} = props
+  const {tasks, removeTask, changeStatus} = props
   const Bang = () => {console.log('Bang')}
   return (
       <div>
@@ -19,7 +20,11 @@ export const Todolist = (props: Props) => {
         <ul>
           {tasks.map(task => (
             <li key={task.id}>
-              <input type="checkbox" checked={task.isDone}/>
+              <input
+                type="checkbox"
+                checked={task.isDone}
+                onChange={() => changeStatus(task.id)}
+              />
               <span>{task.title}</span>
               <Button onClick={() => removeTask(task.id)} title={'x'}/>
             </li>
