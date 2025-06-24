@@ -7,12 +7,13 @@ type Props = {
 };
 export const Todolist = (props: Props) => {
   const {tasks} = props
+  const Bang = () => {console.log('Bang')}
   return (
       <div>
         <h3>What to learn</h3>
         <div>
           <input/>
-          <Button onClick={() => {console.log('Bang')}} title={'+'}/>
+          <Button onClick={Bang} title={'+'}/>
         </div>
         <ul>
           {tasks.map(task => (
@@ -22,9 +23,9 @@ export const Todolist = (props: Props) => {
           ))}
         </ul>
         <div>
-          <button>All</button>
-          <button>Active</button>
-          <button>Completed</button>
+          <Button onClick={Bang} title={'All'}/>
+          <Button onClick={Bang} title={'Active'}/>
+          <Button onClick={Bang} title={'Completed'}/>
         </div>
       </div>
   );
