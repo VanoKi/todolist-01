@@ -19,6 +19,10 @@ function App() {
   const [filter, setFilter] = useState('all')
   const [inputValue, setInputValue] = useState('')
   const [error, setError] = useState('')
+  const [todolists, setTodolists] = useState<Todolist[]>(
+    [{id: v1(), title: 'What to learn', filter: 'all'},
+    {id: v1(), title: 'What to buy', filter: 'all'}]
+  )
   const [tasks, setTasks] = useState([
     { id: v1(), title: 'HTML&CSS', isDone: true },
     { id: v1(), title: 'JS', isDone: true },
