@@ -1,6 +1,7 @@
 import './App.css'
-import {useState} from "react";
+import {useReducer, useState} from "react";
 import {Todolist} from "./components/Todolist.tsx";
+import {taskReducer, ActionType} from "./reducer/tasksReducer.tsx";
 
 export type Task = {
   id: string,
@@ -10,26 +11,17 @@ export type Task = {
 export type FilterType = 'all' | 'active' | 'completed'
 export const v1 = () => crypto.randomUUID()
 
+const initialTasks: Task[] = [
+  { id: v1(), title: 'HTML&CSS', isDone: true },
+  { id: v1(), title: 'JS', isDone: true },
+  { id: v1(), title: 'ReactJS', isDone: false },
+]
+
 function App() {
-  const [filter, setFilter] = useState('all')
-  const [tasks, setTasks] = useState<Task[]>([
-    { id: v1(), title: 'HTML&CSS', isDone: true },
-    { id: v1(), title: 'JS', isDone: true },
-    { id: v1(), title: 'ReactJS', isDone: false },
-  ])
-  const removeTask = (taskId:string) => {
-    setTasks(tasks.filter( t => t.id !== taskId))
-  }
-  const addTask = (task:string) => {
-    const newTask = {id: v1(), title: task, isDone: false}
-    setTasks([newTask, ...tasks])
-  }
-  const changeStatus = (taskId:string) => {
-    setTasks(tasks.map(task => task.id === taskId
-      ? {...task, isDone: !task.isDone}
-      : task))
-  }
-  const changeFiler = (filter:FilterType) => {
+  const [filter, setFilter] = useState<FilterType>('all')
+  const [tasks, dispatch] = useReducer(taskReducer, initialTasks)
+
+  const changeFilter = (filter:FilterType) => {
     switch (filter) {
       case "active": return tasks.filter(task => !task.isDone )
       case "completed": return tasks.filter(task => task.isDone )
@@ -40,11 +32,9 @@ function App() {
   return (
       <div className="app">
         <Todolist
-          tasks={changeFiler(filter)}
-          removeTask={removeTask}
-          changeStatus={changeStatus}
+          tasks={changeFilter(filter)}
+          dispatch={dispatch}
           setFilter={setFilter}
-          addTask={addTask}
         />
       </div>
   )

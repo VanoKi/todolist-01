@@ -1,14 +1,12 @@
 import {Task} from './types.ts'
 import {v1} from "../App.tsx";
 
-export type TasksState = Task[]
-
-type ActionType =
+export type ActionType =
   | {type: 'ADD-TASK', payload: {title: string}}
   | {type: 'REMOVE-TASK', payload: {id: string}}
   | {type: 'TOGGLE-TASK', payload: {id: string}}
 
-export const taskReducer = (state: TasksState, action: ActionType):TasksState => {
+export const taskReducer = (state: Task[], action: ActionType):Task[] => {
   switch (action.type) {
     case "ADD-TASK":
       return [{id: v1(), title: action.payload.title, isDone: false}, ...state]

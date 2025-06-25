@@ -1,22 +1,23 @@
 // @flow
-import {FilterType, Task} from "../App.tsx";
+import {FilterType} from "../App.tsx";
 import {Button} from "./Button.tsx";
 import {Input} from "./Input.tsx";
+import {Task} from '../reducer/types.ts'
+import * as React from "react";
+import {ActionType} from "../reducer/tasksReducer.tsx";
 
 type Props = {
   tasks: Task[]
-  removeTask: (taskId:string) => void
-  changeStatus: (taskId:string) => void
   setFilter: (filter:FilterType) => void
-  addTask: (task:string) => void
+  dispatch: React.Dispatch<ActionType>
 };
 export const Todolist = (props: Props) => {
-  const {tasks, removeTask, changeStatus, setFilter, addTask} = props
+  const {tasks, setFilter, dispatch} = props
   return (
       <div>
         <h3>What to learn</h3>
         <div>
-          <Input addItem={addTask}/>
+          <Input addItem={(title) => dispatch({type: 'ADD-TASK', payload: {title}}) }/>
         </div>
         <ul>
           {tasks.map(task => (
@@ -24,10 +25,10 @@ export const Todolist = (props: Props) => {
               <input
                 type="checkbox"
                 checked={task.isDone}
-                onChange={() => changeStatus(task.id)}
+                onChange={() => dispatch({ type: 'TOGGLE-TASK', payload: { id: task.id } })}
               />
               <span>{task.title}</span>
-              <Button onClick={() => removeTask(task.id)} title={'x'}/>
+              <Button onClick={() => dispatch({ type: 'REMOVE-TASK', payload: { id: task.id } })}/>
             </li>
           ))}
         </ul>
