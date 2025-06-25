@@ -3,10 +3,16 @@ import {TodolistItem} from "./components/TodolistItem.tsx";
 import {ChangeEvent, useState} from "react";
 import {v1} from 'uuid'
 
+export type FilterValues = 'all' | 'active' | 'completed'
 export type Task = {
   id: string
   title: string
   isDone: boolean
+}
+export type Todolist = {
+  id: string
+  title: string
+  filter: FilterValues
 }
 
 function App() {
