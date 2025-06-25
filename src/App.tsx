@@ -8,9 +8,9 @@ export type Task = {
   isDone: boolean
 }
 export type FilterType = 'all' | 'active' | 'completed'
+export const v1 = () => crypto.randomUUID()
 
 function App() {
-  const v1 = () => crypto.randomUUID()
   const [filter, setFilter] = useState('all')
   const [tasks, setTasks] = useState<Task[]>([
     { id: v1(), title: 'HTML&CSS', isDone: true },
