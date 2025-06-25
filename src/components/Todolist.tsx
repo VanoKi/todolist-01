@@ -28,7 +28,9 @@ export const Todolist = (props: Props) => {
                 onChange={() => dispatch({ type: 'TOGGLE-TASK', payload: { id: task.id } })}
               />
               <span>{task.title}</span>
-              <Button onClick={() => dispatch({ type: 'REMOVE-TASK', payload: { id: task.id } })}/>
+              <Button
+                title={'x'}
+                onClick={() => dispatch({ type: 'REMOVE-TASK', payload: { id: task.id } })}/>
             </li>
           ))}
         </ul>
