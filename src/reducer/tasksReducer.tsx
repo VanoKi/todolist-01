@@ -19,5 +19,6 @@ export const taskReducer = (state: TasksState, action: ActionType):TasksState =>
         ? {...t, isDone: !t.isDone}
         : t)
     }
+    default: return state
   }
 }
