@@ -1,22 +1,21 @@
-import {Task} from "../App.tsx";
+import {FilterValues, Task, Todolist} from "../App.tsx";
 import {Button} from "./Button.tsx";
 import {ChangeEvent} from "react";
 import {KeyboardEvent} from "react";
 
 type Props = {
-  title: string
+  todolist: Todolist
   tasks: Task[]
   deleteTask: (taskId:string) => void
-  changeFilter: (filter: string) => void
+  changeFilter: (todolistId: string, filter: string) => void
   inputValue: string
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   addTask: () => void
   changeTask: (taskId:string) => void
   error: string
-  filter: string
 };
 export const TodolistItem = (props: Props) => {
-  const {title, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask, error, filter} = props
+  const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask, error} = props
 
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => (
@@ -36,8 +35,11 @@ export const TodolistItem = (props: Props) => {
       addTask()
     }
   }
-  const getFilterClass = (btnFilter: string) => {
-    return filter === btnFilter ? 'active-filter' : ''
+  // const getFilterClass = (btnFilter: string) => {
+  //   return filter === btnFilter ? 'active-filter' : ''
+  // }
+  const changeFilterHandler = (filter: FilterValues) => {
+    changeFilter(id, filter)
   }
 
   return (
@@ -58,16 +60,20 @@ export const TodolistItem = (props: Props) => {
       </ul>
       <div>
         <Button
-          title={'All'} onClick={() => changeFilter('all')}
-          className={getFilterClass('all')}/>
+          title={'All'}
+          onClick={() => changeFilterHandler('all')}
+          // className={getFilterClass('all')}
+        />
         <Button
           title={'Active'}
-          onClick={() => changeFilter('active')}
-          className={getFilterClass('active')}/>
+          onClick={() => changeFilterHandler('active')}
+          // className={getFilterClass('active')}
+        />
         <Button
           title={'Completed'}
-          onClick={() => changeFilter('completed')}
-          className={getFilterClass('completed')}/>
+          onClick={() => changeFilterHandler('completed')}
+          // className={getFilterClass('completed')}
+        />
       </div>
     </div>
   );

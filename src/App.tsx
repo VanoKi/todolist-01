@@ -16,7 +16,6 @@ export type Todolist = {
 }
 
 function App() {
-  const [filter, setFilter] = useState('all')
   const [inputValue, setInputValue] = useState('')
   const [error, setError] = useState('')
   const [todolists, setTodolists] = useState<Todolist[]>(
@@ -29,15 +28,11 @@ function App() {
     { id: v1(), title: 'ReactJS', isDone: false },
   ])
 
-  const changeFilter = (filter:string) => setFilter(filter)
+  const changeFilter = (todolistId: string, filter:FilterValues) => {
+    setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter} : tl))
+  }
   const deleteTask = (taskID: string) => {
     setTasks(tasks.filter(task => task.id !== taskID))
-  }
-  let filteredTasks = tasks
-  if (filter === 'active') {
-    filteredTasks = tasks.filter(task => !task.isDone)
-  } else if (filter === 'completed') {
-    filteredTasks = tasks.filter(task => task.isDone)
   }
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.currentTarget.value)
@@ -60,21 +55,31 @@ function App() {
   const changeTask = (taskId:string) => {
     setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: !task.isDone} : task))
   }
-
   return (
       <div className="app">
-        <TodolistItem
-          title={'What to learn'}
-          tasks={filteredTasks}
-          deleteTask={deleteTask}
-          changeFilter={changeFilter}
-          inputValue={inputValue}
-          onInputChange={onInputChange}
-          addTask={addTask}
-          changeTask={changeTask}
-          error={error}
-          filter={filter}
-        />
+        {todolists.map(tl => {
+          let filteredTasks = tasks
+          let filter = tl.filter
+          if (filter === 'active') {
+            filteredTasks = tasks.filter(task => !task.isDone)
+          } else if (filter === 'completed') {
+            filteredTasks = tasks.filter(task => task.isDone)
+          }
+          return (
+            <TodolistItem
+              key={tl.id}
+              todolist={tl}
+              tasks={filteredTasks}
+              deleteTask={deleteTask}
+              changeFilter={changeFilter}
+              inputValue={inputValue}
+              onInputChange={onInputChange}
+              addTask={addTask}
+              changeTask={changeTask}
+              error={error}
+            />
+          )
+        })}
       </div>
   )
 }
