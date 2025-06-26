@@ -40,8 +40,8 @@ function App() {
   const changeFilter = (todolistId: string, filter:FilterValues) => {
     setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter} : tl))
   }
-  const deleteTask = (taskID: string) => {
-    setTasks(tasks.filter(task => task.id !== taskID))
+  const deleteTask = (todolistId:string, taskID: string) => {
+    setTasks({...tasks, [todolistId]: tasks[todolistId].filter(task => task.id !== taskID)})
   }
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.currentTarget.value)
