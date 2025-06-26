@@ -32,7 +32,7 @@ export const TodolistItem = (props: Props) => {
   }
   const keyDown =(event: KeyboardEvent) => {
     if (event.key === 'Enter') {
-      addTask()
+      addTask(id)
     }
   }
   const getFilterClass = (btnFilter: string) => {
@@ -52,7 +52,7 @@ export const TodolistItem = (props: Props) => {
           onChange={onInputChange}
           onKeyDown={keyDown}
         />
-        <Button title={'+'} onClick={addTask}/>
+        <Button title={'+'} onClick={() => addTask(id)}/>
         {error && <div className={'error-message'}>{error}</div>}
       </div>
       <ul>
