@@ -15,15 +15,14 @@ export type Todolist = {
   filter: FilterValues
 }
 
-const todolistId1 = v1()
-const todolistId2 = v1()
-
 function App() {
   const [inputValue, setInputValue] = useState('')
   const [error, setError] = useState('')
+  const todolistId1 = v1()
+  const todolistId2 = v1()
   const [todolists, setTodolists] = useState<Todolist[]>(
-    [{id: v1(), title: 'What to learn', filter: 'all'},
-    {id: v1(), title: 'What to buy', filter: 'all'}]
+    [{id: todolistId1, title: 'What to learn', filter: 'all'},
+    {id: todolistId2, title: 'What to buy', filter: 'all'}]
   )
   const [tasks, setTasks] = useState({
     [todolistId1]: [
@@ -68,12 +67,12 @@ function App() {
   return (
       <div className="app">
         {todolists.map(tl => {
-          let filteredTasks = tasks
+          let filteredTasks = tasks[tl.id]
           let filter = tl.filter
           if (filter === 'active') {
-            filteredTasks = tasks.filter(task => !task.isDone)
+            filteredTasks = tasks[tl.id].filter(task => !task.isDone)
           } else if (filter === 'completed') {
-            filteredTasks = tasks.filter(task => task.isDone)
+            filteredTasks = tasks[tl.id].filter(task => task.isDone)
           }
           return (
             <TodolistItem

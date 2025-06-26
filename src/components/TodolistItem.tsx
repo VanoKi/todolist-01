@@ -7,7 +7,7 @@ type Props = {
   todolist: Todolist
   tasks: Task[]
   deleteTask: (todolistId:string, taskId:string) => void
-  changeFilter: (todolistId: string, filter: string) => void
+  changeFilter: (todolistId: string, filter: FilterValues) => void
   inputValue: string
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   addTask: (todolistId:string) => void
