@@ -11,7 +11,7 @@ type Props = {
   inputValue: string
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   addTask: (todolistId:string) => void
-  changeTask: (taskId:string) => void
+  changeTask: (todolistId:string, taskId:string) => void
   error: string
 };
 export const TodolistItem = (props: Props) => {
@@ -23,7 +23,7 @@ export const TodolistItem = (props: Props) => {
         <input
           type={'checkbox'}
           checked={task.isDone}
-          onChange={() => changeTask(task.id)}
+          onChange={() => changeTask(id, task.id)}
         />
         <span>{task.title}</span>
         <Button title={'x'} onClick={() => deleteTask(id, task.id)}/>

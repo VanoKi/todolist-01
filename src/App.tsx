@@ -61,8 +61,8 @@ function App() {
     }
     setInputValue('')
   }
-  const changeTask = (taskId:string) => {
-    setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: !task.isDone} : task))
+  const changeTask = (todolistId:string, taskId:string) => {
+    setTasks({...tasks, [todolistId]: tasks[todolistId].map( task => task.id === taskId ? {...task, isDone: !task.isDone} : task)})
   }
 
   return (
