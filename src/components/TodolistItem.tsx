@@ -6,11 +6,11 @@ import {KeyboardEvent} from "react";
 type Props = {
   todolist: Todolist
   tasks: Task[]
-  deleteTask: (taskId:string) => void
+  deleteTask: (todolistId:string, taskId:string) => void
   changeFilter: (todolistId: string, filter: string) => void
   inputValue: string
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
-  addTask: () => void
+  addTask: (todolistId:string) => void
   changeTask: (taskId:string) => void
   error: string
 };
@@ -26,7 +26,7 @@ export const TodolistItem = (props: Props) => {
           onChange={() => changeTask(task.id)}
         />
         <span>{task.title}</span>
-        <Button title={'x'} onClick={() => deleteTask(task.id)}/>
+        <Button title={'x'} onClick={() => deleteTask(id, task.id)}/>
       </li>
     ))
   }
@@ -35,9 +35,9 @@ export const TodolistItem = (props: Props) => {
       addTask()
     }
   }
-  // const getFilterClass = (btnFilter: string) => {
-  //   return filter === btnFilter ? 'active-filter' : ''
-  // }
+  const getFilterClass = (btnFilter: string) => {
+    return filter === btnFilter ? 'active-filter' : ''
+  }
   const changeFilterHandler = (filter: FilterValues) => {
     changeFilter(id, filter)
   }
@@ -62,17 +62,17 @@ export const TodolistItem = (props: Props) => {
         <Button
           title={'All'}
           onClick={() => changeFilterHandler('all')}
-          // className={getFilterClass('all')}
+          className={getFilterClass('all')}
         />
         <Button
           title={'Active'}
           onClick={() => changeFilterHandler('active')}
-          // className={getFilterClass('active')}
+          className={getFilterClass('active')}
         />
         <Button
           title={'Completed'}
           onClick={() => changeFilterHandler('completed')}
-          // className={getFilterClass('completed')}
+          className={getFilterClass('completed')}
         />
       </div>
     </div>

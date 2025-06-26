@@ -47,14 +47,14 @@ function App() {
     setInputValue(e.currentTarget.value)
     setError('')
   }
-  const addTask = () => {
+  const addTask = (todolistId:string) => {
     if (inputValue.trim()) {
       const newTask: Task = {
         id: v1(),
         title: inputValue,
         isDone: false
       }
-      setTasks([newTask, ...tasks])
+      setTasks({...tasks, [todolistId] : [newTask, ...tasks[todolistId]]})
       setError('')
     } else {
       setError('Title is required')
@@ -64,6 +64,7 @@ function App() {
   const changeTask = (taskId:string) => {
     setTasks(tasks.map(task => task.id === taskId ? {...task, isDone: !task.isDone} : task))
   }
+
   return (
       <div className="app">
         {todolists.map(tl => {
