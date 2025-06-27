@@ -13,9 +13,10 @@ type Props = {
   addTask: (todolistId:string) => void
   changeTask: (todolistId:string, taskId:string) => void
   error: string
+  deleteTodolist: (todolistId: string) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask, error} = props
+  const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask, error, deleteTodolist} = props
 
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => (
@@ -41,10 +42,16 @@ export const TodolistItem = (props: Props) => {
   const changeFilterHandler = (filter: FilterValues) => {
     changeFilter(id, filter)
   }
+  const deleteTodolistHandelr = () => {
+    deleteTodolist(id)
+  }
 
   return (
     <div>
-      <h2>{title}</h2>
+      <div className={'container'}>
+        <h2>{title}</h2>
+        <Button title={'x'} onClick={deleteTodolistHandelr}/>
+      </div>
       <div>
         <input
           className={error ? 'error' : ''}

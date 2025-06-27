@@ -38,3 +38,8 @@ li {
 .active-filter {
   background-color: #dfb1bb;
 }
+
+.container {
+  display: flex;
+  align-items: center;
+}
