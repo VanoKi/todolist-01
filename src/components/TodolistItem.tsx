@@ -17,6 +17,10 @@ type Props = {
 export const TodolistItem = (props: Props) => {
   const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, addTask, changeTask, deleteTodolist, changeTaskTitle, changeTodolistTitle} = props
 
+  const initialState: Todolist[] = []
+  export const todolistReducer = (state: Todolist[] = initialState, action):Todolist[] => {
+
+  }
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => {
         const changeTaskTitleHandler = (title:string) => {
