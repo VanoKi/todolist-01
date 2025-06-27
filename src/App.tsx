@@ -66,10 +66,11 @@ function App() {
   const createTodolist = (title:string) => {
     const newTodolist:Todolist = {
       id: v1(),
-      title: title,
+      title,
       filter: 'all'
     }
     setTodolists([newTodolist, ...todolists])
+    setTasks({...tasks, [newTodolist.id]:[]})
   }
 
   return (

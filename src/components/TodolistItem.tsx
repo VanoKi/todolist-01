@@ -1,7 +1,5 @@
 import {FilterValues, Task, Todolist} from "../App.tsx";
 import {Button} from "./Button.tsx";
-import {ChangeEvent} from "react";
-import {KeyboardEvent} from "react";
 import {CreateItemForm} from "./CreateItemForm.tsx";
 
 type Props = {
@@ -9,11 +7,8 @@ type Props = {
   tasks: Task[]
   deleteTask: (todolistId:string, taskId:string) => void
   changeFilter: (todolistId: string, filter: FilterValues) => void
-  // inputValue: string
-  // onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   addTask: (todolistId:string, title: string) => void
   changeTask: (todolistId:string, taskId:string) => void
-  // error: string
   deleteTodolist: (todolistId: string) => void
 };
 export const TodolistItem = (props: Props) => {

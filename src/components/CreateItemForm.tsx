@@ -13,19 +13,21 @@ export const CreateItemForm = (props: Props) => {
     if (trimmedTitle) {
       props.addItem(title)
       setTitle('')
-    }else {
+    } else {
       setError('Title is required')
     }
   }
-  const createItemOnKeyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
+  const changeItemHandler = (e:ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.value);
+    setError(null)
+  }
+  const createItemOnKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       createItemHandler()
     }
   }
-  const changeItemHandler (e:ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value)
-    setError(null)
-  }
+
+
   return (
     <div className={'container'}>
       <input value={title}
