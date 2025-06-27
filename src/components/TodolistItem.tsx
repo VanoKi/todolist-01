@@ -11,22 +11,29 @@ type Props = {
   addTask: (todolistId:string, title: string) => void
   changeTask: (todolistId:string, taskId:string) => void
   deleteTodolist: (todolistId: string) => void
+  changeTaskTitle: (todolistId:string, taskId:string, title:string) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, addTask, changeTask, deleteTodolist} = props
+  const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, addTask, changeTask, deleteTodolist, changeTaskTitle} = props
 
   const mappedLlist = (tasks:Task[]) => {
-    return tasks.map( task => (
-      <li key={task.id}>
-        <input
-          type={'checkbox'}
-          checked={task.isDone}
-          onChange={() => changeTask(id, task.id)}
-        />
-        <EditableSpan value={task.title}/>
-        <Button title={'x'} onClick={() => deleteTask(id, task.id)}/>
-      </li>
-    ))
+    return tasks.map( task => {
+        const changeTaskTitleHandler = (title:string) => {
+          changeTaskTitle(id, task.id, title)
+        }
+      return (
+        <li key={task.id}>
+          <input
+            type={'checkbox'}
+            checked={task.isDone}
+            onChange={() => changeTask(id, task.id)}
+          />
+          <EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
+          <Button title={'x'} onClick={() => deleteTask(id, task.id)}/>
+        </li>
+      )
+    }
+    )
   }
 
   const getFilterClass = (btnFilter: string) => {
@@ -35,7 +42,7 @@ export const TodolistItem = (props: Props) => {
   const changeFilterHandler = (filter: FilterValues) => {
     changeFilter(id, filter)
   }
-  const deleteTodolistHandelr = () => {
+  const deleteTodolistHandler = () => {
     deleteTodolist(id)
   }
 
@@ -43,7 +50,7 @@ export const TodolistItem = (props: Props) => {
     <div>
       <div className={'container'}>
         <h2>{title}</h2>
-        <Button title={'x'} onClick={deleteTodolistHandelr}/>
+        <Button title={'x'} onClick={deleteTodolistHandler}/>
       </div>
       <div>
         <CreateItemForm addItem={() => addTask(id, title)}/>

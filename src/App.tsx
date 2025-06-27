@@ -44,7 +44,6 @@ function App() {
   const deleteTask = (todolistId:string, taskID: string) => {
     setTasks({...tasks, [todolistId]: tasks[todolistId].filter(task => task.id !== taskID)})
   }
-
   const addTask = (todolistId:string, title:string) => {
       const newTask: Task = {
         id: v1(),
@@ -53,7 +52,6 @@ function App() {
       }
       setTasks({...tasks, [todolistId] : [newTask, ...tasks[todolistId]]})
     }
-
   const changeTask = (todolistId:string, taskId:string) => {
     setTasks({...tasks, [todolistId]: tasks[todolistId].map( task => task.id === taskId ? {...task, isDone: !task.isDone} : task)})
   }
@@ -62,7 +60,6 @@ function App() {
     delete tasks[todolistId]
     setTasks({...tasks})
   }
-
   const createTodolist = (title:string) => {
     const newTodolist:Todolist = {
       id: v1(),
@@ -71,6 +68,12 @@ function App() {
     }
     setTodolists([newTodolist, ...todolists])
     setTasks({...tasks, [newTodolist.id]:[]})
+  }
+  const changeTaskTitle = (todolistId:string, taskId:string, title:string) => {
+    setTasks({...tasks,
+      [todolistId] : tasks[todolistId].map(t => t.id === taskId
+        ? {...t, title}
+        : t)})
   }
 
   return (
@@ -91,12 +94,10 @@ function App() {
               tasks={filteredTasks}
               deleteTask={deleteTask}
               changeFilter={changeFilter}
-              // inputValue={inputValue}
-              // onInputChange={onInputChange}
               addTask={addTask}
               changeTask={changeTask}
-              // error={error}
               deleteTodolist={deleteTodolist}
+              changeTaskTitle={changeTaskTitle}
             />
           )
         })}
