@@ -1,13 +1,35 @@
 // @flow 
-import * as React from 'react';
+import {Button} from "./Button.tsx";
+import {useState} from "react";
 
 type Props = {
-  
+  addItem: (title:string) => void
 };
 export const CreateItemForm = (props: Props) => {
+  const [title, setTitle] = useState('')
+  const [error, setError] = useState('')
+  const createItemHandler = () => {
+    const trimmedTitle = title.trim()
+    if (trimmedTitle) {
+      props.addItem(title)
+      setTitle('')
+    }else {
+      setError('Title is required')
+    }
+  }
+  const createItemOnKeyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      createItemHandler()
+    }
+  }
   return (
-    <div>
-
+    <div className={'container'}>
+      <input value={title}
+             onChange={(e) => setTitle(e.currentTarget.value)}
+             onKeyDown={createItemOnKeyDownHandler}
+      />
+      <Button title={'+'} onClick={createItemHandler}/>
+      {error && <div className={'error-message'}>{error}</div>}
     </div>
   );
 };

@@ -19,8 +19,6 @@ export type TaskState = {
 }
 
 function App() {
-  const [inputValue, setInputValue] = useState('')
-  const [error, setError] = useState('')
   const todolistId1 = v1()
   const todolistId2 = v1()
   const [todolists, setTodolists] = useState<Todolist[]>(
