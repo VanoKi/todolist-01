@@ -1,6 +1,7 @@
 import {FilterValues, Task, Todolist} from "../App.tsx";
 import {Button} from "./Button.tsx";
 import {CreateItemForm} from "./CreateItemForm.tsx";
+import {EditableSpan} from "./EditableSpan.tsx";
 
 type Props = {
   todolist: Todolist
@@ -22,7 +23,7 @@ export const TodolistItem = (props: Props) => {
           checked={task.isDone}
           onChange={() => changeTask(id, task.id)}
         />
-        <span>{task.title}</span>
+        <EditableSpan value={task.title}/>
         <Button title={'x'} onClick={() => deleteTask(id, task.id)}/>
       </li>
     ))
