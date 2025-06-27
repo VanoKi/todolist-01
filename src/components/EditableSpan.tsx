@@ -1,5 +1,5 @@
 // @flow 
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useState, KeyboardEvent} from "react";
 
 type Props = {
   value: string
