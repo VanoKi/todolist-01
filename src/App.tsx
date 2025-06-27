@@ -1,7 +1,8 @@
 import './App.css'
 import {TodolistItem} from "./components/TodolistItem.tsx";
-import {ChangeEvent, useState} from "react";
+import {useState} from "react";
 import {v1} from 'uuid'
+import {CreateItemForm} from "./components/CreateItemForm.tsx";
 
 export type FilterValues = 'all' | 'active' | 'completed'
 export type Task = {
@@ -43,24 +44,16 @@ function App() {
   const deleteTask = (todolistId:string, taskID: string) => {
     setTasks({...tasks, [todolistId]: tasks[todolistId].filter(task => task.id !== taskID)})
   }
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.currentTarget.value)
-    setError('')
-  }
-  const addTask = (todolistId:string) => {
-    if (inputValue.trim()) {
+
+  const addTask = (todolistId:string, title:string) => {
       const newTask: Task = {
         id: v1(),
-        title: inputValue,
+        title,
         isDone: false
       }
       setTasks({...tasks, [todolistId] : [newTask, ...tasks[todolistId]]})
-      setError('')
-    } else {
-      setError('Title is required')
     }
-    setInputValue('')
-  }
+
   const changeTask = (todolistId:string, taskId:string) => {
     setTasks({...tasks, [todolistId]: tasks[todolistId].map( task => task.id === taskId ? {...task, isDone: !task.isDone} : task)})
   }
@@ -70,8 +63,18 @@ function App() {
     setTasks({...tasks})
   }
 
+  const createTodolist = (title:string) => {
+    const newTodolist:Todolist = {
+      id: v1(),
+      title: title,
+      filter: 'all'
+    }
+    setTodolists([newTodolist, ...todolists])
+  }
+
   return (
       <div className="app">
+        <CreateItemForm addItem={createTodolist}/>
         {todolists.map(tl => {
           let filteredTasks = tasks[tl.id]
           let filter = tl.filter
@@ -87,11 +90,11 @@ function App() {
               tasks={filteredTasks}
               deleteTask={deleteTask}
               changeFilter={changeFilter}
-              inputValue={inputValue}
-              onInputChange={onInputChange}
+              // inputValue={inputValue}
+              // onInputChange={onInputChange}
               addTask={addTask}
               changeTask={changeTask}
-              error={error}
+              // error={error}
               deleteTodolist={deleteTodolist}
             />
           )

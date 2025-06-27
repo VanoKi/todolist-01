@@ -1,6 +1,6 @@
 // @flow 
 import {Button} from "./Button.tsx";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 
 type Props = {
   addItem: (title:string) => void
@@ -22,10 +22,14 @@ export const CreateItemForm = (props: Props) => {
       createItemHandler()
     }
   }
+  const changeItemHandler (e:ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.value)
+    setError(null)
+  }
   return (
     <div className={'container'}>
       <input value={title}
-             onChange={(e) => setTitle(e.currentTarget.value)}
+             onChange={changeItemHandler}
              onKeyDown={createItemOnKeyDownHandler}
       />
       <Button title={'+'} onClick={createItemHandler}/>

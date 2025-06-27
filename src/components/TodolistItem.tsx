@@ -2,21 +2,22 @@ import {FilterValues, Task, Todolist} from "../App.tsx";
 import {Button} from "./Button.tsx";
 import {ChangeEvent} from "react";
 import {KeyboardEvent} from "react";
+import {CreateItemForm} from "./CreateItemForm.tsx";
 
 type Props = {
   todolist: Todolist
   tasks: Task[]
   deleteTask: (todolistId:string, taskId:string) => void
   changeFilter: (todolistId: string, filter: FilterValues) => void
-  inputValue: string
-  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
-  addTask: (todolistId:string) => void
+  // inputValue: string
+  // onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
+  addTask: (todolistId:string, title: string) => void
   changeTask: (todolistId:string, taskId:string) => void
-  error: string
+  // error: string
   deleteTodolist: (todolistId: string) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, inputValue, onInputChange, addTask, changeTask, error, deleteTodolist} = props
+  const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, addTask, changeTask, deleteTodolist} = props
 
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => (
@@ -31,11 +32,7 @@ export const TodolistItem = (props: Props) => {
       </li>
     ))
   }
-  const keyDown =(event: KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      addTask(id)
-    }
-  }
+
   const getFilterClass = (btnFilter: string) => {
     return filter === btnFilter ? 'active-filter' : ''
   }
@@ -53,14 +50,7 @@ export const TodolistItem = (props: Props) => {
         <Button title={'x'} onClick={deleteTodolistHandelr}/>
       </div>
       <div>
-        <input
-          className={error ? 'error' : ''}
-          value={inputValue}
-          onChange={onInputChange}
-          onKeyDown={keyDown}
-        />
-        <Button title={'+'} onClick={() => addTask(id)}/>
-        {error && <div className={'error-message'}>{error}</div>}
+        <CreateItemForm addItem={() => addTask(id, title)}/>
       </div>
       <ul>
         {!!tasks.length ? mappedLlist(tasks) : "There are no tasks"}
