@@ -19,7 +19,7 @@ export const CreateItemForm = (props: Props) => {
   }
   const changeItemHandler = (e:ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value);
-    setError(null)
+    setError('')
   }
   const createItemOnKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {

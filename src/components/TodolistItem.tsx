@@ -12,9 +12,10 @@ type Props = {
   changeTask: (todolistId:string, taskId:string) => void
   deleteTodolist: (todolistId: string) => void
   changeTaskTitle: (todolistId:string, taskId:string, title:string) => void
+  changeTodolistTitle: (todolistId: string, title:string) => void
 };
 export const TodolistItem = (props: Props) => {
-  const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, addTask, changeTask, deleteTodolist, changeTaskTitle} = props
+  const {todolist: {id, title, filter}, tasks, deleteTask, changeFilter, addTask, changeTask, deleteTodolist, changeTaskTitle, changeTodolistTitle} = props
 
   const mappedLlist = (tasks:Task[]) => {
     return tasks.map( task => {
@@ -45,11 +46,16 @@ export const TodolistItem = (props: Props) => {
   const deleteTodolistHandler = () => {
     deleteTodolist(id)
   }
+  const changeTodolistTitleHandler = (title:string) => {
+    changeTodolistTitle(id, title)
+  }
 
   return (
     <div>
       <div className={'container'}>
-        <h2>{title}</h2>
+        <h2>
+          <EditableSpan value={title} onChange={changeTodolistTitleHandler}/>
+        </h2>
         <Button title={'x'} onClick={deleteTodolistHandler}/>
       </div>
       <div>
