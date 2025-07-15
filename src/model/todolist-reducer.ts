@@ -33,6 +33,6 @@ export const createTodolistAC = (title: string):CreateTodolistAction => {
   return {type: 'create_todolist', payload: { id: newId, title}} as const
 }
 
-export const changeTodolistTitleAC = (title: string, id: string) => {
+export const changeTodolistTitleAC: ChangeTodolistTitleAction = ({id, title} :{title: string, id: string}) => {
   return {type: 'change_todolist_title', payload: {id, title}} as const
 }
