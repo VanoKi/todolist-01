@@ -18,3 +18,7 @@ export type DeleteTodolistAction = {
 }
 
 type Actions = DeleteTodolistAction
+
+export const deleteTodolistAC = (id: string):DeleteTodolistAction => {
+  return {type: 'delete_todolist', payload: {id}} as const
+}
