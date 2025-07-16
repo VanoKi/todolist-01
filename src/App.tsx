@@ -29,11 +29,12 @@ export type TaskState = {
 function App() {
     const todolistId1 = v1()
     const todolistId2 = v1()
-    const initialState = [
+    const initialState:Todolist[] = [
         {id: todolistId1, title: 'What to learn', filter: 'all'},
-        {id: todolistId2, title: 'What to buy', filter: 'all'}]
+        {id: todolistId2, title: 'What to buy', filter: 'all'}
+    ]
     const [todolists, dispatchToTodolists] = useReducer(todolistReducer, initialState)
-    const [tasks, setTasks] = useState<TaskState>({
+    const initialTasks = {
         [todolistId1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JS', isDone: true},
@@ -43,10 +44,12 @@ function App() {
             {id: v1(), title: 'Rest API', isDone: true},
             {id: v1(), title: 'GraphQL', isDone: false},
         ],
-    })
+    }
+    const [tasks, setTasks] = useState<TaskState>({})
 
     const changeFilter = (todolistId: string, filter: FilterValues) => {
-        dispatchToTodolists(changeTodolistFilterAC(todolistId, filter))
+        // dispatchToTodolists(changeTodolistFilterAC(todolistId, filter))
+        dispatchToTodolists({type: 'change_filter_a', payload: {id: todolistId, filter}})
     }
     const deleteTask = (todolistId: string, taskID: string) => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].filter(task => task.id !== taskID)})
