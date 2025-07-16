@@ -1,10 +1,10 @@
-import type {Task, TasksState} from '../App'
+import type {Task, TaskState} from '../App'
 import {CreateTodolistAction, DeleteTodolistAction} from "./todolist-reducer.ts";
 import {v1} from "uuid";
 
-const initialState: TasksState = {}
+const initialState: TaskState = {}
 
-export const tasksReducer = (state: TasksState = initialState, action: Actions): TasksState => {
+export const tasksReducer = (state: TaskState = initialState, action: Actions): TaskState => {
   switch (action.type) {
     case 'create_todolist': {
       return {...state, [action.payload.id] : []}
@@ -31,26 +31,45 @@ export const tasksReducer = (state: TasksState = initialState, action: Actions):
     case 'change_task_status' : {
       const todolistId = action.payload.id
       const taskId = action.payload.taskId
-      return {...state, state[todolistId].map(task => task.id === taskId ? {...task, status: !task.isDone} : task)}
+      const status = action.payload.status
+      return {...state, [todolistId] :state[todolistId].map(task => task.id === taskId ? {...task, isDone: status} : task)}
+    }
+    case 'change_task_title' : {
+      const {id: todolistId, taskId, title} = action.payload
+      // const todolistId = action.payload.id
+      // const taskId = action.payload.taskId
+      // const title = action.payload.title
+      return {...state, [todolistId]:state[todolistId].map(task => task.id === taskId ? {...task, title} : task)}
     }
     default:
       return state
   }
 }
 
+const person = {
+  name : 'Vasya',
+  city: 'Diatlowo'
+}
+
+const secondPerson = {...person, city: 'Minsk'}
+
 export type DeleteTaskAction = ReturnType<typeof deleteTaskAC>
 export type CreateTaskAction = ReturnType<typeof createTaskAC>
 export type ChangeTaskStatusAction = ReturnType<typeof changeTaskStatusAC>
 type Actions = CreateTodolistAction | DeleteTodolistAction | DeleteTaskAction | CreateTaskAction | ChangeTaskStatusAction
 
-export const deleteTaskAC = () => {
-  return {type: 'delete_todolist', payload: {id, taskId}}
+export const deleteTaskAC = ({id, taskId}:{id:string, taskId:string}) => {
+  return {type: 'delete_task', payload: {id, taskId}} as const
 }
 
-export const createTaskAC = () => {
-  return {type: 'create_task', payload: {id, title}}
+export const createTaskAC = ({id, title} : {id: string, title: string}) => {
+  return {type: 'create_task', payload: {id, title}} as const
 }
 
-export const changeTaskStatusAC = () => {
-  return {type: 'change_task_status', payload: {id, taskId, status}}
+export const changeTaskStatusAC = ({id, taskId, status}:{id:string, taskId:string, status:boolean}) => {
+  return {type: 'change_task_status', payload: {id, taskId, status}} as const
+}
+
+export const changeTaskTitleAC = ({id, taskId, title}:{id:string, taskId:string, title:string}) => {
+  return {type: 'change_task_title', payload: {id, taskId, title}} as const
 }

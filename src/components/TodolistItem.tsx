@@ -9,7 +9,7 @@ type Props = {
   deleteTask: (todolistId:string, taskId:string) => void
   changeFilter: (todolistId: string, filter: FilterValues) => void
   addTask: (todolistId:string, title: string) => void
-  changeTask: (todolistId:string, taskId:string) => void
+  changeTask: (todolistId:string, taskId:string, status:boolean) => void
   deleteTodolist: (todolistId: string) => void
   changeTaskTitle: (todolistId:string, taskId:string, title:string) => void
   changeTodolistTitle: (todolistId: string, title:string) => void
@@ -27,7 +27,7 @@ export const TodolistItem = (props: Props) => {
           <input
             type={'checkbox'}
             checked={task.isDone}
-            onChange={() => changeTask(id, task.id)}
+            onChange={(e) => changeTask(id, task.id, e.currentTarget.checked)}
           />
           <EditableSpan value={task.title} onChange={changeTaskTitleHandler}/>
           <Button title={'x'} onClick={() => deleteTask(id, task.id)}/>
