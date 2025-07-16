@@ -18,5 +18,9 @@ export const tasksReducer = (state: TasksState = initialState, action: Actions):
   }
 }
 
+export type DeleteTodolistAction = ReturnType<typeof deleteTaskAC>
 type Actions = CreateTodolistAction | DeleteTodolistAction
 
+export const deleteTaskAC = () => {
+  return {type: 'delete_todolist', payload: {id, taskId}}
+}
