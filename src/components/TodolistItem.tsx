@@ -59,7 +59,7 @@ export const TodolistItem = (props: Props) => {
         <Button title={'x'} onClick={deleteTodolistHandler}/>
       </div>
       <div>
-        <CreateItemForm addItem={() => addTask(id, title)}/>
+        <CreateItemForm addItem={(taskTitle) => addTask(id, taskTitle)}/>
       </div>
       <ul>
         {!!tasks.length ? mappedLlist(tasks) : "There are no tasks"}
