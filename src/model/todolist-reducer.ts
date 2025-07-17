@@ -9,7 +9,7 @@ export const todolistReducer = (state: Todolist[] = initialState, action: Action
     }
     case 'create_todolist' : {
       const newTodolist:Todolist = {id: action.payload.id, title: action.payload.title, filter: 'all'}
-      return [...state, newTodolist]
+      return [newTodolist, ...state]
     }
     case 'change_todolist_title' : {
       return state.map(tl => tl.id === action.payload.id ? {...tl, title: action.payload.title} : tl)

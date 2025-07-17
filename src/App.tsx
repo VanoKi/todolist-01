@@ -1,15 +1,9 @@
 import './App.css'
 import {TodolistItem} from "./components/TodolistItem.tsx";
-import {useReducer, useState} from "react";
+import {useReducer} from "react";
 import {v1} from 'uuid'
 import {CreateItemForm} from "./components/CreateItemForm.tsx";
-import {
-    changeTodolistFilterAC,
-    changeTodolistTitleAC,
-    createTodolistAC,
-    deleteTodolistAC,
-    todolistReducer
-} from "./model/todolist-reducer.ts";
+import {changeTodolistTitleAC, createTodolistAC, deleteTodolistAC, todolistReducer} from "./model/todolist-reducer.ts";
 import {changeTaskStatusAC, changeTaskTitleAC, createTaskAC, deleteTaskAC, tasksReducer} from "./model/task-reducer.ts";
 
 export type FilterValues = 'all' | 'active' | 'completed'
@@ -66,8 +60,9 @@ function App() {
         dispatchToTasks(deleteTodolistAC(todolistId))
     }
     const createTodolist = (title: string) => {
-        dispatchToTodolists(createTodolistAC(title))
-        dispatchToTasks(createTodolistAC(title))
+        const action = createTodolistAC(title)
+        dispatchToTodolists(action)
+        dispatchToTasks(action)
     }
     const changeTaskTitle = (todolistId: string, taskId: string, title: string) => {
         dispatchToTasks(changeTaskTitleAC({id: todolistId, taskId, title}))
