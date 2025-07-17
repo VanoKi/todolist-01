@@ -46,13 +46,6 @@ export const tasksReducer = (state: TaskState = initialState, action: Actions): 
   }
 }
 
-const person = {
-  name : 'Vasya',
-  city: 'Diatlowo'
-}
-
-const secondPerson = {...person, city: 'Minsk'}
-
 export type DeleteTaskAction = ReturnType<typeof deleteTaskAC>
 export type CreateTaskAction = ReturnType<typeof createTaskAC>
 export type ChangeTaskStatusAction = ReturnType<typeof changeTaskStatusAC>
