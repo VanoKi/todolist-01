@@ -49,7 +49,8 @@ export const tasksReducer = (state: TaskState = initialState, action: Actions): 
 export type DeleteTaskAction = ReturnType<typeof deleteTaskAC>
 export type CreateTaskAction = ReturnType<typeof createTaskAC>
 export type ChangeTaskStatusAction = ReturnType<typeof changeTaskStatusAC>
-type Actions = CreateTodolistAction | DeleteTodolistAction | DeleteTaskAction | CreateTaskAction | ChangeTaskStatusAction
+export type ChangeTaskTitleAction = ReturnType<typeof changeTaskTitleAC>
+type Actions = CreateTodolistAction | DeleteTodolistAction | DeleteTaskAction | CreateTaskAction | ChangeTaskStatusAction | ChangeTaskTitleAction
 
 export const deleteTaskAC = ({id, taskId}:{id:string, taskId:string}) => {
   return {type: 'delete_task', payload: {id, taskId}} as const
