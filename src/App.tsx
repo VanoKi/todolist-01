@@ -74,7 +74,7 @@ function App() {
         dispatchToTasks(changeTaskTitleAC({id: todolistId, taskId, title}))
     }
     const changeTodolistTitle = (todolistId: string, title: string) => {
-        dispatchToTodolists(changeTodolistTitleAC(todolistId, title))
+        dispatchToTodolists(changeTodolistTitleAC({id: todolistId, title}))
     }
 
     return (
