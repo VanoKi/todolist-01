@@ -1,19 +1,21 @@
 import {Task} from "../App.tsx";
 
 const initialState:Task[] = []
-const Action = 'REMOVE_TASK' | 'ADD_TASK' | 'CHANGE_TASK' | 'CHANGE_FILTER'
+type Action = { type: 'REMOVE_TASK', id:string } |
+  { type: 'ADD_TASK', title:string } |
+  { type:'CHANGE_TASK', id:string }
 
-export const taskReducer = (state = initialState, actioin) => {
-  switch (actioin.type) {
+export const taskReducer = (state = initialState, action:Action) => {
+  switch (action.type) {
     case 'REMOVE_TASK': {
-      return state.filter((task) => task.id !== actioin.id)
+      return state.filter((task) => task.id !== action.id)
     }
     case 'ADD_TASK': {
-      const newTask = {id: crypto.randomUUID(), title: actioin.title, isDone: false}
-      return {newTask, ...state}
+      const newTask = {id: crypto.randomUUID(), title: action.title, isDone: false}
+      return [newTask, ...state]
     }
     case 'CHANGE_TASK': {
-      return state.map(task => task.id === actioin.id ? {...task, isDone: !task.isDone} : task)
+      return state.map(task => task.id === action.id ? {...task, isDone: !task.isDone} : task)
     }
     // case 'CHANGE_FILTER': {
     //   return
