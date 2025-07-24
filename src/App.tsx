@@ -21,18 +21,12 @@ function App() {
   const [tasks, dispatchToTasks] = useReducer(taskReducer, initial)
 
   const removeTask = (taskId:string) => {
-    // setTasks(tasks.filter( t => t.id !== taskId))
     dispatchToTasks({type: 'REMOVE_TASK', id: taskId})
   }
   const addTask = (task:string) => {
-    // const newTask = {id: v1(), title: task, isDone: false}
-    // setTasks([newTask, ...tasks])
     dispatchToTasks({type: 'ADD_TASK', title: task})
   }
   const changeStatus = (taskId:string) => {
-    // setTasks(tasks.map(task => task.id === taskId
-    //   ? {...task, isDone: !task.isDone}
-    //   : task))
     dispatchToTasks({type: 'CHANGE_TASK', id: taskId})
   }
   const changeFiler = (filter:FilterType) => {
