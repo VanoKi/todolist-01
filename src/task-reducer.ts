@@ -7,7 +7,7 @@ type Actions =
 
 const v1 = () => crypto.randomUUID()
 
-const initialState: Task[] = [
+export const initialState: Task[] = [
   { id: v1(), title: 'HTML&CSS', isDone: true },
   { id: v1(), title: 'JS', isDone: true },
   { id: v1(), title: 'ReactJS', isDone: false },
@@ -16,7 +16,7 @@ const initialState: Task[] = [
 export const taskReducer = (state = initialState, action: Actions):Task[] => {
   switch (action.type) {
     case "ADD_TASK":
-      return [{id: v1(), title: action.title, isDone: true}]
+      return [{id: v1(), title: action.title, isDone: false}, ...state]
     case "REMOVE_TASK":
       return state.filter(task => task.id !== action.id)
     case "CHANGE_TASK_STATUS":
