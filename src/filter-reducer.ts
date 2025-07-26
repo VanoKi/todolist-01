@@ -10,3 +10,8 @@ export const filterReducer = (state:FilterType = initialFilter, actions:Actions)
     default: return state
   }
 }
+
+export const setFilterAC = (filter: FilterType):Actions => {
+  return {type: 'SET_FILTER', filter}
+}
+

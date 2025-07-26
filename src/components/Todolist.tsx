@@ -5,10 +5,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "../store.ts";
 import {FilterType} from "../App.tsx";
 import {useState} from "react";
+import {setFilterAC} from "../filter-reducer.ts";
 
 export const Todolist = () => {
   const tasks = useSelector((state: AppRootState) => state.tasks);
   const dispatch = useDispatch();
+  const filter = useSelector((state: AppRootState) => state.filter);
+
   const removeTask = (taskId:string) => {
     dispatch({type: 'REMOVE_TASK', id: taskId})
   }
@@ -19,14 +22,17 @@ export const Todolist = () => {
     dispatch({type: 'CHANGE_TASK_STATUS', id: taskId})
   }
 
-  const [filter, setFilter] = useState<FilterType>('all')
   const changeFiler = (filter:FilterType) => {
+    dispatch(setFilterAC(filter))
+  }
+
+  const filteredTasks = (() => {
     switch (filter) {
       case "active": return tasks.filter(task => !task.isDone )
       case "completed": return tasks.filter(task => task.isDone )
       default: return tasks
     }
-  }
+  })()
 
   return (
       <div>
@@ -35,7 +41,7 @@ export const Todolist = () => {
           <Input addItem={addTask}/>
         </div>
         <ul>
-          {changeFiler(filter).map(task => (
+          {filteredTasks.map(task => (
             <li key={task.id}>
               <input
                 type="checkbox"
@@ -48,9 +54,9 @@ export const Todolist = () => {
           ))}
         </ul>
         <div>
-          <Button onClick={()=> setFilter('all')} title={'All'}/>
-          <Button onClick={()=> setFilter('active')} title={'Active'}/>
-          <Button onClick={()=> setFilter('completed')} title={'Completed'}/>
+          <Button onClick={()=> changeFiler('all')} title={'All'}/>
+          <Button onClick={()=> changeFiler('active')} title={'Active'}/>
+          <Button onClick={()=> changeFiler('completed')} title={'Completed'}/>
         </div>
       </div>
   );
