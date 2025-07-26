@@ -1,16 +1,16 @@
 import './App.css'
-import {TodolistItem} from "./components/TodolistItem.tsx";
+import {TodolistItem} from "../components/TodolistItem.tsx";
 import {useReducer} from "react";
 import {v1} from 'uuid'
-import {CreateItemForm} from "./components/CreateItemForm.tsx";
+import {CreateItemForm} from "../components/CreateItemForm.tsx";
 import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     createTodolistAC,
     deleteTodolistAC,
     todolistReducer
-} from "./model/todolist-reducer.ts";
-import {changeTaskStatusAC, changeTaskTitleAC, createTaskAC, deleteTaskAC, tasksReducer} from "./model/task-reducer.ts";
+} from "../model/todolist-reducer.ts";
+import {changeTaskStatusAC, changeTaskTitleAC, createTaskAC, deleteTaskAC, tasksReducer} from "../model/task-reducer.ts";
 
 export type FilterValues = 'all' | 'active' | 'completed'
 export type Task = {
