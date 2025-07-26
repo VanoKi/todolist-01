@@ -1,11 +1,13 @@
 import {taskReducer} from "./task-reducer.ts";
-import {combineReducers, createStore} from "redux";
 import {filterReducer} from "./filter-reducer.ts";
+import {configureStore} from "@reduxjs/toolkit";
 
-const rootReducer = combineReducers({
-  tasks: taskReducer,
-  filter: filterReducer
+export const store = configureStore({
+  reducer: {
+    tasks: taskReducer,
+    filter: filterReducer
+  }
 })
 
-export type AppRootState = ReturnType<typeof rootReducer>
-export const store = createStore(rootReducer)
+export type AppRootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
