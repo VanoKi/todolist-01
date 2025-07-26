@@ -69,7 +69,7 @@ function App() {
         dispatch(changeTaskStatusAC({id: todolistId, taskId, status}))
     }
     const deleteTodolist = (todolistId: string) => {
-        dispatch(deleteTodolistAC(todolistId))
+        dispatch(deleteTodolistAC({id: todolistId}))
     }
     const createTodolist = (title: string) => {
         dispatch(createTodolistAC(title))
