@@ -22,7 +22,7 @@ const taskSlice = createSlice({
     changeStatus(state, action:PayloadAction<string>) {
       const task = state.find(t => t.id === action.payload)
       if (task) {
-        return task.isDone = !task.isDone
+        task.isDone = !task.isDone
       }
     }
   }
