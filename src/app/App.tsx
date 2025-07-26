@@ -13,6 +13,8 @@ import {
 import {changeTaskStatusAC, changeTaskTitleAC, createTaskAC, deleteTaskAC, tasksReducer} from "../model/task-reducer.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@reduxjs/toolkit/query";
+import {useAppDispatch} from "../common/hooks/useAppDispatch.ts";
+import {useAppSelectors} from "../common/hooks/useAppSelectors.ts";
 
 export type FilterValues = 'all' | 'active' | 'completed'
 export type Task = {
@@ -36,7 +38,7 @@ function App() {
         {id: todolistId1, title: 'What to learn', filter: 'all'},
         {id: todolistId2, title: 'What to buy', filter: 'all'}
     ]
-    const todolists = useSelector<RootState, Todolist[]>(state => state.todolists)
+    const todolists = useAppSelectors(state => state.todolists)
     const initialTasks = {
         [todolistId1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
@@ -48,8 +50,8 @@ function App() {
             {id: v1(), title: 'GraphQL', isDone: false},
         ],
     }
-    const tasks = useSelector<RootState, TaskState>(state => state.tasks)
-    const dispatch = useDispatch()
+    const tasks = useAppSelectors(state => state.tasks)
+    const dispatch = useAppDispatch()
 
     const changeFilter = (todolistId: string, filter: FilterValues) => {
         dispatch(changeTodolistFilterAC(todolistId, filter))
