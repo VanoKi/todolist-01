@@ -1,12 +1,12 @@
 import {FilterType} from "./App.tsx";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState:FilterType = 'all'
 const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setFilter: (state, action: FilterType) => {
+    setFilter: (state, action: PayloadAction<FilterType>) => {
       return action.payload
     }
   }

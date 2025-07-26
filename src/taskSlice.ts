@@ -13,13 +13,13 @@ const taskSlice = createSlice({
   name: "task",
   initialState,
   reducers: {
-    assTask(state, action:PayloadAction) {
+    addTask(state, action:PayloadAction<string>) {
       state.unshift({id:v1(), title: action.payload, isDone: false})
     },
-    removeTask(state, action:PayloadAction) {
+    removeTask(state, action:PayloadAction<string>) {
       return state.filter(t => t.id !== action.payload)
     },
-    changeTask(state, action:PayloadAction) {
+    changeStatus(state, action:PayloadAction<string>) {
       const task = state.find(t => t.id === action.payload)
       if (task) {
         return task.isDone = !task.isDone

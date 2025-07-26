@@ -1,5 +1,5 @@
-import {taskReducer} from "./task-reducer.ts";
-import {filterReducer} from "./filter-reducer.ts";
+import taskReducer from "./taskSlice.ts";
+import filterReducer from "./filterSlice.ts";
 import {configureStore} from "@reduxjs/toolkit";
 
 export const store = configureStore({

@@ -3,29 +3,13 @@ import {Button} from "./Button.tsx";
 import {Input} from "./Input.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "../store.ts";
-import {FilterType} from "../App.tsx";
-import {useState} from "react";
-import {setFilterAC} from "../filter-reducer.ts";
+import {addTask, changeTask, removeTask} from "../taskSlice.ts";
+import {setFilter} from "../filterSlice.ts";
 
 export const Todolist = () => {
   const tasks = useSelector((state: AppRootState) => state.tasks);
   const dispatch = useDispatch();
   const filter = useSelector((state: AppRootState) => state.filter);
-
-  const removeTask = (taskId:string) => {
-    dispatch({type: 'REMOVE_TASK', id: taskId})
-  }
-  const addTask = (task:string) => {
-    dispatch({type: 'ADD_TASK', title: task})
-  }
-  const changeStatus = (taskId:string) => {
-    dispatch({type: 'CHANGE_TASK_STATUS', id: taskId})
-  }
-
-  const changeFiler = (filter:FilterType) => {
-    dispatch(setFilterAC(filter))
-  }
-
   const filteredTasks = (() => {
     switch (filter) {
       case "active": return tasks.filter(task => !task.isDone )
@@ -38,7 +22,7 @@ export const Todolist = () => {
       <div>
         <h3>What to learn</h3>
         <div>
-          <Input addItem={addTask}/>
+          <Input addItem={(title) => dispatch(addTask(title))}/>
         </div>
         <ul>
           {filteredTasks.map(task => (
@@ -46,17 +30,17 @@ export const Todolist = () => {
               <input
                 type="checkbox"
                 checked={task.isDone}
-                onChange={() => changeStatus(task.id)}
+                onChange={() => dispatch(changeTask(task.id))}
               />
               <span>{task.title}</span>
-              <Button onClick={() => removeTask(task.id)} title={'x'}/>
+              <Button onClick={() => dispatch(removeTask(task.id))} title={'x'}/>
             </li>
           ))}
         </ul>
         <div>
-          <Button onClick={()=> changeFiler('all')} title={'All'}/>
-          <Button onClick={()=> changeFiler('active')} title={'Active'}/>
-          <Button onClick={()=> changeFiler('completed')} title={'Completed'}/>
+          <Button onClick={()=> dispatch(setFilter('all'))} title={'All'}/>
+          <Button onClick={()=> dispatch(setFilter('active'))} title={'Active'}/>
+          <Button onClick={()=> dispatch(setFilter('completed'))} title={'Completed'}/>
         </div>
       </div>
   );
