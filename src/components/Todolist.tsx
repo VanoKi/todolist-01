@@ -3,7 +3,7 @@ import {Button} from "./Button.tsx";
 import {Input} from "./Input.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "../store.ts";
-import {addTask, changeTask, removeTask} from "../taskSlice.ts";
+import {addTask, changeStatus, removeTask} from "../taskSlice.ts";
 import {setFilter} from "../filterSlice.ts";
 
 export const Todolist = () => {
@@ -30,7 +30,7 @@ export const Todolist = () => {
               <input
                 type="checkbox"
                 checked={task.isDone}
-                onChange={() => dispatch(changeTask(task.id))}
+                onChange={() => dispatch(changeStatus(task.id))}
               />
               <span>{task.title}</span>
               <Button onClick={() => dispatch(removeTask(task.id))} title={'x'}/>
