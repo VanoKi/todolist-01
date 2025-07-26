@@ -15,6 +15,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@reduxjs/toolkit/query";
 import {useAppDispatch} from "../common/hooks/useAppDispatch.ts";
 import {useAppSelectors} from "../common/hooks/useAppSelectors.ts";
+import {selectTodolists} from "../model/todolists-selectors.ts";
+import {selectTaks} from "../model/tasks-selesctors.ts";
 
 export type FilterValues = 'all' | 'active' | 'completed'
 export type Task = {
@@ -38,7 +40,7 @@ function App() {
         {id: todolistId1, title: 'What to learn', filter: 'all'},
         {id: todolistId2, title: 'What to buy', filter: 'all'}
     ]
-    const todolists = useAppSelectors(state => state.todolists)
+    const todolists = useAppSelectors(selectTodolists)
     const initialTasks = {
         [todolistId1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
@@ -50,7 +52,7 @@ function App() {
             {id: v1(), title: 'GraphQL', isDone: false},
         ],
     }
-    const tasks = useAppSelectors(state => state.tasks)
+    const tasks = useAppSelectors(selectTaks)
     const dispatch = useAppDispatch()
 
     const changeFilter = (todolistId: string, filter: FilterValues) => {
