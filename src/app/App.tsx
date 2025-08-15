@@ -1,22 +1,18 @@
 import './App.css'
 import {TodolistItem} from "../components/TodolistItem.tsx";
-import {useReducer} from "react";
-import {v1} from 'uuid'
 import {CreateItemForm} from "../components/CreateItemForm.tsx";
 import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     createTodolistAC,
-    deleteTodolistAC,
-    todolistReducer
+    deleteTodolistAC
 } from "../model/todolist-reducer.ts";
-import {changeTaskStatusAC, changeTaskTitleAC, createTaskAC, deleteTaskAC, tasksReducer} from "../model/task-reducer.ts";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@reduxjs/toolkit/query";
+import {changeTaskStatusAC, changeTaskTitleAC, createTaskAC, deleteTaskAC} from "../model/task-reducer.ts";
 import {useAppDispatch} from "../common/hooks/useAppDispatch.ts";
 import {useAppSelectors} from "../common/hooks/useAppSelectors.ts";
 import {selectTodolists} from "../model/todolists-selectors.ts";
 import {selectTaks} from "../model/tasks-selesctors.ts";
+import {nanoid} from "@reduxjs/toolkit";
 
 export type FilterValues = 'all' | 'active' | 'completed'
 export type Task = {
@@ -34,8 +30,8 @@ export type TaskState = {
 }
 
 function App() {
-    const todolistId1 = v1()
-    const todolistId2 = v1()
+    const todolistId1 = nanoid()
+    const todolistId2 = nanoid()
     const initialState:Todolist[] = [
         {id: todolistId1, title: 'What to learn', filter: 'all'},
         {id: todolistId2, title: 'What to buy', filter: 'all'}
@@ -43,13 +39,13 @@ function App() {
     const todolists = useAppSelectors(selectTodolists)
     const initialTasks = {
         [todolistId1]: [
-            {id: v1(), title: 'HTML&CSS', isDone: true},
-            {id: v1(), title: 'JS', isDone: true},
-            {id: v1(), title: 'ReactJS', isDone: false},
+            {id: nanoid(), title: 'HTML&CSS', isDone: true},
+            {id: nanoid(), title: 'JS', isDone: true},
+            {id: nanoid(), title: 'ReactJS', isDone: false},
         ],
         [todolistId2]: [
-            {id: v1(), title: 'Rest API', isDone: true},
-            {id: v1(), title: 'GraphQL', isDone: false},
+            {id: nanoid(), title: 'Rest API', isDone: true},
+            {id: nanoid(), title: 'GraphQL', isDone: false},
         ],
     }
     const tasks = useAppSelectors(selectTaks)
